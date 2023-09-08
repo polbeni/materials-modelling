@@ -57,12 +57,12 @@ def generate_POSCAR(input_file, num_chemical, num_config, output_file):
     return print(f'POSCAR generated from Direct configuration={num_config} in the provided XDATCAR file')
 
 
-num_POSCAR = 20000
+num_POSCAR = 30000
 
-for x in range(100):
+for x in range(10):
     name_file = 'generated_POSCAR/POSCAR-' + "{:03d}".format(x+1)
     
-    num_POSCAR = num_POSCAR + (32000 - 20000)/100
+    num_POSCAR = num_POSCAR + (60000 - 30000)/10
 
     print('POSCAR-' + "{:03d}".format(x+1) + ':')
     generate_POSCAR('XDATCAR_merged', 3, num_POSCAR, name_file)
