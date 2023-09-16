@@ -105,10 +105,13 @@ os.system("chmod +x cp_script.sh")
 send_jobs = open('send_jobs.sh', "w")
 send_jobs.write('#!/bin/bash \n')
 send_jobs.write(' \n')
-phases_line = 'phases='
+phases_line = 'phases=('
 for phase in phases_to_relax:
-    phases_line = phases_line + '"' + phase + '" '
-phases_line = phases_line + ' \n'
+    if phase == phases_to_relax[-1]:
+        phases_line = phases_line + '"' + phase + '"'
+    else:
+        phases_line = phases_line + '"' + phase + '" '
+phases_line = phases_line + ') \n'
 send_jobs.write(phases_line)
 send_jobs.write(' \n')
 send_jobs.write('for dir in "${phases[@]}"; do \n')
