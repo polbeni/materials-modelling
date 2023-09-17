@@ -24,6 +24,10 @@ if os.path.exists('relax-phases'):
     shutil.rmtree('relax-phases')
 os.mkdir('relax-phases')
 
+source_file = dir_name + '/structure_files/initial_structures/relaxed_structures/energy_ranking.txt' 
+destination_file = 'relax-phases/'
+shutil.copy(source_file, destination_file)
+
 for phase in phases_to_relax:
     phase_new_path = 'relax-phases/' + phase
     os.mkdir(phase_new_path)
