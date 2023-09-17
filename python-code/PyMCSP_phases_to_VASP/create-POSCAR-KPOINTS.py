@@ -6,7 +6,7 @@ import shutil
 import subprocess
 
 num_phases = 15 # number of phases we want to relax
-dir_name = 'Ag3SBr' # name of the folder of the material of interest
+dir_name = 'PbScTi2O6' # name of the folder of the material of interest
 
 energy_file_path = dir_name + '/structure_files/initial_structures/relaxed_structures/energy_ranking.txt'
 
@@ -121,3 +121,22 @@ send_jobs.write('cd ../.. \n')
 send_jobs.write('done')
 send_jobs.close()
 os.system("chmod +x send_jobs.sh")
+
+check_simulations = open('check_simulations.sh', "w")
+check_simulations.write('#!/bin/bash \n')
+check_simulations.write(' \n')
+phases_line = 'phases=('
+for phase in phases_to_relax:
+    if phase == phases_to_relax[-1]:
+        phases_line = phases_line + '"' + phase + '"'
+    else:
+        phases_line = phases_line + '"' + phase + '" '
+phases_line = phases_line + ') \n'
+check_simulations.write(phases_line)
+check_simulations.write(' \n')
+check_simulations.write('for dir in "${phases[@]}"; do \n')
+check_simulations.write('echo simulation $dir \n')
+check_simulations.write('tail -n 1 relax-phases/$dir/OUTCAR \n')
+check_simulations.write('done')
+check_simulations.close()
+os.system("chmod +x check_simulations.sh")
