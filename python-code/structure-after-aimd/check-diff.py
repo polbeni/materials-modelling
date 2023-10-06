@@ -13,9 +13,9 @@ results.readline()
 for x in range(num_silver_ions):
     actual_line = results.readline()
 
-    prop_matrix[x,0] = float(actual_line.split()[3])/float(actual_line.split()[2])
-    prop_matrix[x,1] = float(actual_line.split()[6])/float(actual_line.split()[5])
-    prop_matrix[x,2] = float(actual_line.split()[9])/float(actual_line.split()[8])
+    prop_matrix[x,0] = abs(float(actual_line.split()[3])/float(actual_line.split()[2]))
+    prop_matrix[x,1] = abs(float(actual_line.split()[6])/float(actual_line.split()[5]))
+    prop_matrix[x,2] = abs(float(actual_line.split()[9])/float(actual_line.split()[8]))
 
 results.close()
 
