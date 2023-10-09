@@ -1,7 +1,6 @@
 # Pol Benítez Colominas, October 2023
 # Universitat Politècnica de Catalunya
 
-from re import A
 import numpy as np
 
 def get_positions(path_XDATCAR, ion_number, total_steps, partial_steps):
@@ -77,8 +76,8 @@ POSCAR.close()
 
 
 
-param_partial = 20000
-param_total = 26170
+param_partial = 40000
+param_total = 71620
 
 inputs_file = open('results', "w")
 # ion_#: ion number
