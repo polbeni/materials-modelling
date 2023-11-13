@@ -21,6 +21,11 @@ atoms_ideal = prim.repeat(cell_size)
 # generate the structures
 structures = generate_mc_rattled_structures(atoms_ideal, n_structures, rattle_std, minimum_distance)
 
+# save the structures for later use in force determination
+write('prim.extxyz', prim)
+write('supercell_ideal.extxyz', atoms_ideal)
+write('supercells_rattled.extxyz', structures)
+
 # save the structures in POSCAR file (some corrections have to be done)
 for x in range(n_structures):
     structures[x].write(f'POSCAR-{x+1:04}_pre')
