@@ -1,18 +1,19 @@
+# Pol Benítez Colominas, November 2023
+# Universitat Politècnica de Catalunya
+
+# Code to generate rattled POSCAR files to send to VASP with hiPhive
+
 import os
 
 from ase.io import write
 from ase.io.vasp import read_vasp
-from ase.build import bulk
-from ase.calculators.emt import EMT
 from hiphive.structure_generation import generate_mc_rattled_structures
-
-import numpy as np
 
 # parameters
 n_structures = 10 # number of structures
 cell_size = 2 # size of the supercell
-rattle_std = 0.03
-minimum_distance = 2.3
+rattle_std = 0.03 # standard deviation of the distribution of displacements
+minimum_distance = 2.3 # minimum separation between two atoms in the rattled structures
 
 # read POSCAR file
 prim = read_vasp(file='POSCAR')
@@ -22,9 +23,78 @@ atoms_ideal = prim.repeat(cell_size)
 structures = generate_mc_rattled_structures(atoms_ideal, n_structures, rattle_std, minimum_distance)
 
 # save the structures for later use in force determination
-write('prim.extxyz', prim)
-write('supercell_ideal.extxyz', atoms_ideal)
-write('supercells_rattled.extxyz', structures)
+write('prim.extxyz', prim) # primitive cell
+write('supercell_ideal_prev.extxyz', atoms_ideal) # ideal supercell
+# write('supercells_rattled.extxyz', structures)
+
+# fix the ion sort problem in atoms_ideal file
+supercell_corrected = open('supercell_ideal.extxyz', 'w')
+supercell_prev = open('supercell_ideal_prev.extxyz', 'r')
+
+for x in range(2):
+    line_prev = supercell_prev.readline()
+    supercell_corrected.write(line_prev)
+
+    if x == 0:
+        total_atoms = int(line_prev)
+
+supercell_prev.close()
+
+poscar = open('POSCAR', 'r')
+for x in range(5):
+    poscar.readline()
+atoms_line = poscar.readline()
+atoms = list(atoms_line.split())
+stoichiometry_line = poscar.readline()
+stoichiometry = list(stoichiometry_line.split())
+poscar.close()
+
+total_num_atoms_stoi = 0
+for stoi in stoichiometry:
+    total_num_atoms_stoi = total_num_atoms_stoi + int(stoi)
+
+num_iteration = 1
+for actual_stoi in stoichiometry:
+    supercell_prev = open('supercell_ideal_prev.extxyz', 'r')
+    for x in range(2):
+        supercell_prev.readline()
+
+    if num_iteration == 1:
+        previous_stoi = 0
+        next_stoi = total_num_atoms_stoi - int(actual_stoi)
+    elif num_iteration == len(stoichiometry):
+        previous_stoi = total_num_atoms_stoi - int(actual_stoi)
+        next_stoi = 0
+    else:
+        previous_stoi = 0
+        for y in range(num_iteration - 1):
+            previous_stoi = previous_stoi + int(stoichiometry[y])
+        next_stoi = total_num_atoms_stoi - int(actual_stoi) - previous_stoi
+
+    atoms_considered = 0
+    while atoms_considered <= total_atoms:
+        if previous_stoi != 0:
+            for y in range(previous_stoi):
+                supercell_prev.readline()
+                atoms_considered = atoms_considered + 1
+
+        for y in range(int(actual_stoi)):
+            atom_position_line = supercell_prev.readline()
+            supercell_corrected.write(atom_position_line)
+            atoms_considered = atoms_considered + 1
+
+        if next_stoi != 0:
+            for y in range(next_stoi):
+                supercell_prev.readline()
+                atoms_considered = atoms_considered + 1
+
+    num_iteration = num_iteration + 1
+
+
+supercell_prev.close()
+supercell_corrected.close()
+
+os.remove('supercell_ideal_prev.extxyz')
 
 # save the structures in POSCAR file (some corrections have to be done)
 for x in range(n_structures):
