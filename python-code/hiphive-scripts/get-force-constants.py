@@ -56,7 +56,7 @@ disp_direct = get_directories_sorted(directory_path, prefix)
 rattled_file = open('rattled_structures.extxyz', "w")
 
 for disp in disp_direct:
-    path_structure = 'data/Ag3SI-Pm-3m/' + disp + '/vasprun.xml'
+    path_structure = directory_path + '/' + disp + '/vasprun.xml'
     rattled = read(path_structure, format='vasp-xml')
 
     write('actual_rattled.extxyz', rattled)
