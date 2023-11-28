@@ -13,8 +13,8 @@ from hiphive.utilities import prepare_structures
 from trainstation import Optimizer
 
 # parameters
-cutoffs = [4.5, 4.0, 4.0] # cutoffs for pairs, triplets and quadruplets (in angstrom)
-directory_path = 'data/Ag3SI-Pm-3m' # path of the VASP results
+cutoffs = [4.5, 4.0, 4.0]             # cutoffs for pairs, triplets and quadruplets (in angstrom)
+directory_path = 'data/Ag3SI-Pm-3m'   # path of the VASP results
 
 # read the structure input files
 prim = read('prim.extxyz') # primitive cell
