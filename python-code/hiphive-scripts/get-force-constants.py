@@ -12,12 +12,15 @@ from hiphive import ClusterSpace, StructureContainer, ForceConstantPotential
 from hiphive.utilities import prepare_structures
 from trainstation import Optimizer
 
+# parameters
+cutoffs = [4.5, 4.0, 4.0] # cutoffs for pairs, triplets and quadruplets (in angstrom)
+directory_path = 'data/Ag3SI-Pm-3m' # path of the VASP results
+
 # read the structure input files
 prim = read('prim.extxyz') # primitive cell
 atoms_ideal = read('supercell_ideal.extxyz') # ideal supercell
 
-# define the cutoffs and create the cluster space
-cutoffs = [4.5, 4.0, 4.0] # cutoffs for pairs, triplets and quadruplets (in angstrom)
+# create the cluster space for the defined cutoffs
 cs = ClusterSpace(prim, cutoffs)
 
 os.mkdir('log_files')
@@ -46,7 +49,6 @@ def get_directories_sorted(path, starts_with):
     return sorted_directories
 
 # generate a list with the name of these directories
-directory_path = 'data/Ag3SI-Pm-3m' # path of the VASP results
 prefix = 'disp'
 
 disp_direct = get_directories_sorted(directory_path, prefix)
