@@ -13,8 +13,9 @@ from hiphive.utilities import prepare_structures
 from trainstation import Optimizer
 
 # parameters
-cutoffs = [4.5, 4.0, 4.0]             # cutoffs for pairs, triplets and quadruplets (in angstrom)
-directory_path = 'data/Ag3SI-Pm-3m'   # path of the VASP results
+cutoffs = [4.5, 4.0, 4.0]               # cutoffs for pairs, triplets and quadruplets (in angstrom)
+directory_path = 'data/Ag3SI-Pm-3m'     # path of the VASP results
+optimization_method = 'least-squares'   # name of the desired optimization method employed
 
 # read the structure input files
 prim = read('prim.extxyz') # primitive cell
@@ -38,12 +39,9 @@ sys.stdout = original_stdout
 def get_directories_sorted(path, starts_with):
     directories = [d for d in os.listdir(path) if os.path.isdir(os.path.join(path, d)) and d.startswith(starts_with)]
     
-    # Define a custom sorting function to extract the number from the directory name
     def extract_number(directory):
-        # Assuming the number is at the end of the directory name
-        return int(directory.split('-')[-1])  # Adjust the split character as needed
+        return int(directory.split('-')[-1]) 
 
-    # Sort the directories based on the extracted numbers
     sorted_directories = sorted(directories, key=extract_number)
     
     return sorted_directories
@@ -85,7 +83,7 @@ with open('log_files/3-structure-container', 'w') as f: # save the information i
 
 # train the parameters, if necessary change the optimizer method
 # using the 'fit_method' keyword in the Optimizer object
-opt = Optimizer(sc.get_fit_data())
+opt = Optimizer(sc.get_fit_data(), fit_method=optimization_method)
 opt.train()
 
 with open('log_files/4-optimizer', 'w') as f: # save the information in a file

@@ -25,7 +25,6 @@ structures = generate_mc_rattled_structures(atoms_ideal, n_structures, rattle_st
 # save the structures for later use in force determination
 write('prim.extxyz', prim) # primitive cell
 write('supercell_ideal_prev.extxyz', atoms_ideal) # ideal supercell
-# write('supercells_rattled.extxyz', structures)
 
 # if cell_size != [1,1,1] fix the ion sort problem
 if (cell_size[0] == 1) and (cell_size[1] == 1) and (cell_size[2] == 1): # no bug situation
