@@ -1,0 +1,21 @@
+SYSTEM   =  INCAR for performing ab initio molecular dynamics simulations
+
+LCHARG   =  .FALSE.     # write charge densities
+LWAVE    =  .FALSE.     # write wavefunctions
+LREAL    =  Auto        # the projection operators are evaluated in real-space or reciprocal-space
+
+EDIFF    =  1E-5        # break condition for electronic loop (eV)
+ENCUT    =  650.0       # energy cutoff for the plane-wave basis (eV)
+
+IBRION   =  0           # how the ions are updated and moved
+ISIF     =  0           # determines if compute the stress tensor and the ionic degrees of freedom
+NSW      =  400000      # maximum number of ionic steps
+SMASS    =  2           # controls the velocities during aimd simulations
+TEBEG    =  200.0       # starting temperature for aimd simulations (K)
+POTIM    =  1.5         # time of the step in aimd simulations (fs)
+NBLOCK   =  1           # number of ionic steps written in XDATCAR file (10 recommended for large simulations)
+
+ALGO     =  Normal      # electronic minimization algorithm 
+NCORE    =  24          # number of cores that work on an individual orbital
+
+GGA      =  PS          # type of LDA or GGA exchange-correlation functional
