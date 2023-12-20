@@ -1,6 +1,6 @@
-from re import A
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MultipleLocator
 from scipy.interpolate import interp1d
 
 def mean_val(min_x, max_x, num_points, array_curves):
@@ -90,22 +90,22 @@ plt.figure()
 fig, (ax1, ax2, ax3, ax4) = plt.subplots(4, figsize=(5,8))
 fig.suptitle('Ag$_3$SBr $Pm\overline{3}m$')
 
-ax1.set_title('T=0 K')
+#ax1.set_title('T=0 K')
 #ax1.set_xlabel('E-E$_{F}$ (eV)')
 ax1.set_ylabel('PDOS')
-ax1.set_xlim(-7,5)
-ax1.set_ylim(0,24)
+ax1.set_xlim(-4,4)
+ax1.set_ylim(0,10)
 ax1.plot(t_0_total[:,0], t_0_total[:,-1], linewidth=1, color='black', label='Total')
 ax1.plot(t_0_Ag[:,0], t_0_Ag[:,-1], linewidth=1, color='royalblue', label='Ag')
 ax1.plot(t_0_S[:,0], t_0_S[:,-1], linewidth=1, color='salmon', label='S')
 ax1.plot(t_0_Br[:,0], t_0_Br[:,-1], linewidth=1, color='lightgreen', label='Br')
 ax1.legend()
 
-ax2.set_title('T=200 K')
+#ax2.set_title('T=200 K')
 #ax2.set_xlabel('E-E$_{F}$ (eV)')
 ax2.set_ylabel('PDOS')
-ax2.set_xlim(-7,5)
-ax2.set_ylim(0,24)
+ax2.set_xlim(-4,4)
+ax2.set_ylim(0,10)
 ax2.plot(interval_x[:], t_200_total[:]/8, linewidth=1, color='black', label='Total')
 ax2.fill_between(interval_x[:], (t_200_total[:]/8 - error_200_total[:]/8),
                  (t_200_total[:]/8 + error_200_total[:]/8), color='black', alpha=0.6)
@@ -118,7 +118,7 @@ ax2.fill_between(interval_x[:], (t_200_S[:]/8 - error_200_S[:]/8),
 ax2.plot(interval_x[:], t_200_Br[:]/8, linewidth=1, color='lightgreen', label='Br')
 ax2.fill_between(interval_x[:], (t_200_Br[:]/8 - error_200_Br[:]/8),
                  (t_200_Br[:]/8 + error_200_Br[:]/8), color='lightgreen', alpha=0.6)
-ax2.legend()
+#ax2.legend()
 
 
 arr_400_total = [None]*9
@@ -152,11 +152,11 @@ t_400_S, error_400_S, interval_x = mean_val(-8, 7, 1000, arr_400_S)
 t_400_Br, error_400_Br, interval_x = mean_val(-8, 7, 1000, arr_400_Br)
 
 
-ax3.set_title('T=400 K')
+#ax3.set_title('T=400 K')
 #ax3.set_xlabel('E-E$_{F}$ (eV)')
 ax3.set_ylabel('PDOS')
-ax3.set_xlim(-7,5)
-ax3.set_ylim(0,24)
+ax3.set_xlim(-4,4)
+ax3.set_ylim(0,10)
 ax3.plot(interval_x[:], t_400_total[:]/8, linewidth=1, color='black', label='Total')
 ax3.fill_between(interval_x[:], (t_400_total[:]/8 - error_400_total[:]/8),
                  (t_400_total[:]/8 + error_400_total[:]/8), color='black', alpha=0.6)
@@ -169,7 +169,7 @@ ax3.fill_between(interval_x[:], (t_400_S[:]/8 - error_400_S[:]/8),
 ax3.plot(interval_x[:], t_400_Br[:]/8, linewidth=1, color='lightgreen', label='Br')
 ax3.fill_between(interval_x[:], (t_400_Br[:]/8 - error_400_Br[:]/8),
                  (t_400_Br[:]/8 + error_400_Br[:]/8), color='lightgreen', alpha=0.6)
-ax3.legend()
+#ax3.legend()
 
 
 arr_600_total = [None]*8
@@ -203,11 +203,11 @@ t_600_S, error_600_S, interval_x = mean_val(-8, 7, 1000, arr_600_S)
 t_600_Br, error_600_Br, interval_x = mean_val(-8, 7, 1000, arr_600_Br)
 
 
-ax4.set_title('T=600 K')
+#ax4.set_title('T=600 K')
 ax4.set_xlabel('E-E$_{F}$ (eV)')
 ax4.set_ylabel('PDOS')
-ax4.set_xlim(-7,5)
-ax4.set_ylim(0,24)
+ax4.set_xlim(-4,4)
+ax4.set_ylim(0,10)
 ax4.plot(interval_x[:], t_600_total[:]/8, linewidth=1, color='black', label='Total')
 ax4.fill_between(interval_x[:], (t_600_total[:]/8 - error_600_total[:]/8),
                  (t_600_total[:]/8 + error_600_total[:]/8), color='black', alpha=0.6)
@@ -220,7 +220,34 @@ ax4.fill_between(interval_x[:], (t_600_S[:]/8 - error_600_S[:]/8),
 ax4.plot(interval_x[:], t_600_Br[:]/8, linewidth=1, color='lightgreen', label='Br')
 ax4.fill_between(interval_x[:], (t_600_Br[:]/8 - error_600_Br[:]/8),
                  (t_600_Br[:]/8 + error_600_Br[:]/8), color='lightgreen', alpha=0.6)
-ax4.legend()
+#ax4.legend()
+
+ax1.text(-.5, 8.5, 'T=0 K', fontsize=14)
+ax2.text(-.75, 8.5, 'T=200 K', fontsize=14)
+ax3.text(-.75, 8.5, 'T=400 K', fontsize=14)
+ax4.text(-.75, 8.5, 'T=600 K', fontsize=14)
+
+major_locator = MultipleLocator(1) 
+minor_locator = MultipleLocator(.2) 
+ax1.xaxis.set_major_locator(major_locator)
+ax1.xaxis.set_minor_locator(minor_locator)
+ax2.xaxis.set_major_locator(major_locator)
+ax2.xaxis.set_minor_locator(minor_locator)
+ax3.xaxis.set_major_locator(major_locator)
+ax3.xaxis.set_minor_locator(minor_locator)
+ax4.xaxis.set_major_locator(major_locator)
+ax4.xaxis.set_minor_locator(minor_locator)
+
+major_locator = MultipleLocator(2.5) 
+minor_locator = MultipleLocator(.5) 
+ax1.yaxis.set_major_locator(major_locator)
+ax1.yaxis.set_minor_locator(minor_locator)
+ax2.yaxis.set_major_locator(major_locator)
+ax2.yaxis.set_minor_locator(minor_locator)
+ax3.yaxis.set_major_locator(major_locator)
+ax3.yaxis.set_minor_locator(minor_locator)
+ax4.yaxis.set_major_locator(major_locator)
+ax4.yaxis.set_minor_locator(minor_locator)
 
 plt.tight_layout()
-plt.savefig('eDOS.pdf')
+plt.savefig('eDOS-Ag3SBr.pdf')
