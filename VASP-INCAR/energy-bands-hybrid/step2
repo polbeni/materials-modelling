@@ -1,0 +1,18 @@
+SYSTEM   =  INCAR for energy bands. Step 2 - Hybrid calculation using a suitably modified KPOINTS file
+
+LCHARG   =  .FALSE.     # write charge densities
+#LWAVE    =  .TRUE.      # write wavefunctions
+LREAL    =  .FALSE.     # the projection operators are evaluated in real-space or reciprocal-space
+
+EDIFF    =  1E-6        # break condition for electronic loop (eV)
+ENCUT    =  550.0       # energy cutoff for the plane-wave basis (eV)
+
+ISMEAR   =  0           # partial occupancies for each orbital (0->Gaussian smearing)
+SIGMA    =  0.01        # width of the smearing (eV)
+NBANDS   =  8           # total number of KS or QP orbitals in the calculation
+
+LHFCALC  =  .TRUE.      # specifies if HF/DFT hybrid functional type calculation is performed
+HFSCREEN =  0.2         # range-separation parameter in range-separated hybrif functionals (angstrom)
+ALGO     =  D           # electronic minimization algorithm
+
+GGA      =  PS          # type of LDA or GGA exchange-correlation functional
