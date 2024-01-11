@@ -14,13 +14,14 @@ n_structures = 10          # number of structures
 cell_size = [2,2,2]        # size of the supercell
 rattle_std = 0.03          # standard deviation of the distribution of displacements
 minimum_distance = 2.3     # minimum separation between two atoms in the rattled structures
-
+seed_number = 12345        # seed number for the random numbers in rattled structures generation
+ 
 # read POSCAR file
 prim = read_vasp(file='POSCAR')
 atoms_ideal = prim.repeat(cell_size)
 
 # generate the structures
-structures = generate_mc_rattled_structures(atoms_ideal, n_structures, rattle_std, minimum_distance)
+structures = generate_mc_rattled_structures(atoms_ideal, n_structures, rattle_std, minimum_distance, seed=seed_number)
 
 # save the structures for later use in force determination
 write('prim.extxyz', prim) # primitive cell
