@@ -1,6 +1,9 @@
 # Pol Benítez Colominas, January 2024
 # Universitat Politècnica de Catalunya
 
+# This script looks for materials in the materials project dataset with the desired properties, here materials with
+# band gap larger than 0.1 eV, and creates a file with the id of the found materials and their properties of interest
+
 # Official Materials Project API documentation: https://docs.materialsproject.org/downloading-data/using-the-api/examples
 
 
