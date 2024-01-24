@@ -6,6 +6,7 @@
 
 import os
 import sys
+import shutil
 
 from ase.io import read, write
 from hiphive import ClusterSpace, StructureContainer, ForceConstantPotential
@@ -24,6 +25,7 @@ atoms_ideal = read('supercell_ideal.extxyz') # ideal supercell
 # create the cluster space for the defined cutoffs
 cs = ClusterSpace(prim, cutoffs)
 
+shutil.rmtree('log_files')
 os.mkdir('log_files')
 
 with open('log_files/1-cluster-space', 'w') as f: # save the information in a file
