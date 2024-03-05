@@ -27,7 +27,7 @@ def get_energy(oszicar_file):
     return ground_state
 
 possible_kpoints = [4, 5, 6, 7, 8, 9, 10] # desired kpoints grid
-possible_encuts = [450, 500, 550, 600, 650, 700, 750] # desired encut values
+possible_encuts = [450, 500, 550, 600, 650, 700, 750, 800] # desired encut values
 
 for x in possible_kpoints:
     for y in possible_encuts:
@@ -35,4 +35,4 @@ for x in possible_kpoints:
 
         energy = get_energy(name_path + '/OSZICAR')
 
-        print(f'The obtained energy for kpoints {x:01d}x{x:01d}x{x:01d} and ENCUT={y:01d} is {energy:.3f} eV')
+        print(f'The obtained energy for kpoints {x:01d}x{x:01d}x{x:01d} and ENCUT={y:01d} is {energy:.5f} eV')

@@ -51,7 +51,7 @@ def generate_INCAR(path, encut):
     return
 
 possible_kpoints = [4, 5, 6, 7, 8, 9, 10] # desired kpoints grid
-possible_encuts = [450, 500, 550, 600, 650, 700, 750] # desired encut values
+possible_encuts = [450, 500, 550, 600, 650, 700, 750, 800] # desired encut values
 
 path_save = 'save/'
 
