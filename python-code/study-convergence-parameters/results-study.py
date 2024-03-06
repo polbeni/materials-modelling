@@ -36,3 +36,4 @@ for x in possible_kpoints:
         energy = get_energy(name_path + '/OSZICAR')
 
         print(f'The obtained energy for kpoints {x:01d}x{x:01d}x{x:01d} and ENCUT={y:01d} is {energy:.5f} eV')
+    print('')
