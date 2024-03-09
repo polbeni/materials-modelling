@@ -1,4 +1,4 @@
-SYSTEM   =  INCAR for energy bands. Step 2 - Hybrid calculation using a suitably modified KPOINTS file
+SYSTEM   =  INCAR for energy bands. Step 2 - Hybrid calculation using a suitable modified KPOINTS file
 
 LCHARG   =  .FALSE.     # write charge densities
 #LWAVE    =  .TRUE.      # write wavefunctions

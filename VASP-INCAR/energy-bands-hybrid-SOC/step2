@@ -16,4 +16,6 @@ ALGO     =  D           # electronic minimization algorithm
 
 LORBIT   =  11          # projection method onto local quantum numbers
 
+LSORBIT  =  .TRUE.      # switch on spin-orbit coupling
+
 GGA      =  PS          # type of LDA or GGA exchange-correlation functional
