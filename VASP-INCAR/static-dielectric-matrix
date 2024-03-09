@@ -1,0 +1,22 @@
+SYSTEM   =  INCAR for dielectric constant determination (hybrid functional are not supported)
+
+LCHARG   =  .FALSE.     # write charge densities
+LWAVE    =  .TRUE.      # write wavefunctions
+LREAL    =  .FALSE.     # the projection operators are evaluated in real-space or reciprocal-space
+
+EDIFF    =  1E-7        # break condition for electronic loop (eV)
+ENCUT    =  550.0       # energy cutoff for the plane-wave basis (eV)
+
+NELM     =  200         # maximum number of electronic steps
+NSW      =  0           # static calculation
+
+ALGO     =  Normal      # electronic minimization algorithm
+
+ISMEAR   =  0           # partial occupancies for each orbital (0->Gaussian smearing)
+SIGMA    =  0.01        # width of the smearing (eV)
+
+IBRION   =  8           # how the ions are updated and moved
+
+LEPSILON =  .TRUE.      # to determine the static dielectric constant
+
+GGA      =  PS          # type of LDA or GGA exchange-correlation functional
