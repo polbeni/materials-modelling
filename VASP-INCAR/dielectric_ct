@@ -8,7 +8,6 @@ EDIFF    =  1E-7        # break condition for electronic loop (eV)
 ENCUT    =  550.0       # energy cutoff for the plane-wave basis (eV)
 
 NELM     =  200         # maximum number of electronic steps
-NSW      =  0           # static calculation
 
 ALGO     =  Normal      # electronic minimization algorithm
 
