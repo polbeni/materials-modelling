@@ -10,16 +10,19 @@ The scripts and available content:
    - Perform ionic relaxations.
    - Determine phonon frequencies in $\Gamma$-point.
    - Perform ab-initio molecular dynamics (aimd).
+   - Compute the dielectric constant
    - Compute the elastic tensor.
-   - Compute the dielectric tensor.
+   - Compute the dielectric tensor for optical properties.
    - Determine the electronic structure.
    - Compute the energy bands (with and without hybrid functionals).
 - **Python scripts**: assortment of python codes for many different things. With these scripts is possible to:
+   - Generate KPOINTS and INCAR file for a study of energy convergence.
    - Get the optical and electronic (band gap) properties.
    - Plot phonon frequencies and phonon density of states from [phonopy](https://phonopy.github.io/phonopy/) results.
    - Get thermal properties from [phonopy](https://phonopy.github.io/phonopy/) results and study diffusion from molecular dynamics simulations.
    - Plot electronic density of states (eDOS) with and without thermal correction.
    - Plot energy bands.
+   - Compute bond lengths.
    - Functionalities to send to VASP crystal structures found with [PyMCSP](https://github.com/polbeni/PyMCSP).
    - Get the resulting VASP energies from the determined structures with [PyMCSP](https://github.com/polbeni/PyMCSP).
    - Use [Materials Project](https://next-gen.materialsproject.org/) API to download data from their dataset.
