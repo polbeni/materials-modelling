@@ -49,4 +49,4 @@ data = {
 }
 
 df_data = pd.DataFrame(data)
-df_data.to_csv('data_relaxation.csv')
+df_data.to_csv('data_relaxation.csv', index=False)
