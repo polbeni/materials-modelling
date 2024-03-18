@@ -27,6 +27,7 @@ The scripts and available content:
    - Get the resulting VASP energies from the determined structures with [PyMCSP](https://github.com/polbeni/PyMCSP).
    - Use [Materials Project](https://next-gen.materialsproject.org/) API to download data from their dataset.
    - Use [M3GNet](https://github.com/materialsvirtuallab/m3gnet).
+   - Re-train M3GNet from DFT results.
    - Use different functionalities of [hiPhive](https://hiphive.materialsmodeling.org/).
    - Generate POSCAR files from a XDATCAR file.
    - Study the movement of ions from molecular dynamics simulations.
