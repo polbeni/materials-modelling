@@ -4,11 +4,12 @@ LCHARG   =  .TRUE.     # write charge densities
 LWAVE    =  .FALSE.     # write wavefunctions
 
 EDIFF    =  1E-7        # break condition for electronic loop (eV)
-ENCUT    =  550.0       # energy cutoff for the plane-wave basis (eV)
+ENCUT    =  700.0       # energy cutoff for the plane-wave basis (eV)
 ISMEAR   =  0           # partial occupancies for each orbital (0->Gaussian smearing)
 SIGMA    =  0.2         # width of the smearing (eV)
-IALGO    =  48          # algorithm to optimize the orbitals
 NELM     =  200         # maximum number of electronic steps
+
+ALGO     =  All         # electronic minimization algorithm
 
 NCORE    =  28          # number of cores that work on an individual orbital
 
