@@ -1,0 +1,24 @@
+SYSTEM   =  INCAR for total local potential determination
+
+LCHARG   =  .FALSE.     # write charge densities
+LWAVE    =  .FALSE.     # write wavefunctions
+
+EDIFF    =  1E-7        # break condition for electronic loop (eV)
+ENCUT    =  550.0       # energy cutoff for the plane-wave basis (eV)
+ISMEAR   =  0           # partial occupancies for each orbital (0->Gaussian smearing)
+SIGMA    =  0.2         # width of the smearing (eV)
+NELM     =  200         # maximum number of electronic steps
+
+ALGO     =  All         # electronic minimization algorithm
+
+NCORE    =  28          # number of cores that work on an individual orbital
+
+LVTOT    = .TRUE.       # if true saves the total local potential
+
+NEDOS    =  3001        # number of grid points on which the DOS is evaluated
+LORBIT   =  11          # projection method onto local quantum numbers
+
+LHFCALC  =  .TRUE.      # specifies if HF/DFT hybrid functional type calculation is performed
+HFSCREEN =  0.2         # range-separation parameter in range-separated hybrid functionals (angstrom)
+
+GGA      =  PS          # type of LDA or GGA exchange-correlation functional

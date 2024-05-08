@@ -1,0 +1,7 @@
+Step 1: relax the bulk structure
+
+Step 2: compute the total local potential of the bulk structure using the local-potential INCAR file
+
+Step 3: relax the vacuum slab (around 20-25 angstrom for the vacuum and the material layer)
+
+Step 4: compute the total local potential of the vacuum slab using the local-potential INCAR file
