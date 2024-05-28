@@ -18,6 +18,8 @@ LVTOT    = .TRUE.       # if true saves the total local potential
 NEDOS    =  3001        # number of grid points on which the DOS is evaluated
 LORBIT   =  11          # projection method onto local quantum numbers
 
+LSORBIT  =  .TRUE.      # swithces on spin-orbit coupling
+
 LHFCALC  =  .TRUE.      # specifies if HF/DFT hybrid functional type calculation is performed
 HFSCREEN =  0.2         # range-separation parameter in range-separated hybrid functionals (angstrom)
 
