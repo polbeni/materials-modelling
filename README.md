@@ -15,8 +15,11 @@ The scripts and available content:
    - Compute the dielectric tensor for optical properties.
    - Determine the electronic structure.
    - Compute the energy bands (with and without hybrid functionals).
+   - Compute the charge density.
+   - Perform band alignment calculations.
 - **Python scripts**: assortment of python codes for many different things. With these scripts is possible to:
    - Generate KPOINTS and INCAR file for a study of energy convergence.
+   - Generate POTCAR file.
    - Get the optical and electronic (band gap) properties.
    - Plot phonon frequencies and phonon density of states from [phonopy](https://phonopy.github.io/phonopy/) results.
    - Get thermal properties from [phonopy](https://phonopy.github.io/phonopy/) results and study diffusion from molecular dynamics simulations.
@@ -33,6 +36,7 @@ The scripts and available content:
    - Study the movement of ions from molecular dynamics simulations.
    - Change the atomic species from POSCAR files.
    - Find new possible structure reached with molecular dynamics simulations.
+   - Scripts to search in Togo's phonon database [Phonondb](https://github.com/atztogo/phonondb)
 
 
 ## Disclaimer
