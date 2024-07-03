@@ -2,23 +2,20 @@ from pymatgen.core import Structure
 
 import warnings
 
-import matgl
-from matgl.ext.ase import Relaxer
+from m3gnet.models import Relaxer
+from pymatgen.core import Lattice, Structure
 
-
-warnings.simplefilter("ignore") # To suppress warnings for clearer output
+for category in (UserWarning, DeprecationWarning):
+    warnings.filterwarnings("ignore", category=category, module="tensorflow")
 
 
 # Import the POSCAR file
 crystal_structure = Structure.from_file("POSCAR")
 
-# Load the M3GNet model
-pot = matgl.load_model("M3GNet-MP-2021.2.8-PES")
-
 # Create the ionic relaxation method
-relaxer = Relaxer(potential=pot)
+relaxer = Relaxer()
 
-relax_results = relaxer.relax(crystal_structure, verbose=True) # other labels: fmax, ...
+relax_results = relaxer.relax(crystal_structure, verbose=True)
 
 # Show the results
 final_structure = relax_results['final_structure']

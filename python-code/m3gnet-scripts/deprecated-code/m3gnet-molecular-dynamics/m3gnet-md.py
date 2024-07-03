@@ -1,4 +1,4 @@
-# Pol Benítez Colominas, date of creation: 2023/09/07, date of last modification: 2024/07/03
+# Pol Benítez Colominas, date of creation: 2023/09/07, date of last modification: 2023/09/07
 
 # Code to run molecular dynamics simulations with m3gnet model.
 # Provide a POSCAR file and input file with the different variables for
@@ -6,24 +6,16 @@
 
 import os
 
-import warnings
-
-from pymatgen.core import Structure
-
-import matgl
-from matgl.ext.ase import MolecularDynamics
+from pymatgen.core import Structure, Lattice
+from m3gnet.models import MolecularDynamics
 
 import ase
 from ase.io.trajectory import Trajectory
+from ase.io import read, write
 from ase.io.vasp import write_vasp_xdatcar
-
-warnings.simplefilter("ignore") # To suppress warnings for clearer output
 
 # Read the POSCAR file
 crystal_structure = Structure.from_file("POSCAR")
-
-# Load the M3GNet model
-pot = matgl.load_model("M3GNet-MP-2021.2.8-PES")
 
 # Default values if no inputs file provided
 tbeg = 1000
@@ -54,7 +46,6 @@ if os.path.exists('inputs'):
 # Create the simulation model
 md = MolecularDynamics(
     atoms=crystal_structure, #crsytal structure
-    potential=pot, #selected model, here M3GNet
     temperature=tbeg,  # temperature in K
     ensemble=mdalgo,  # type of ensemble
     timestep=potim, # time for each step in fs

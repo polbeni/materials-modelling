@@ -1,0 +1,5 @@
+temperature = 2000        # temperature in K,                 in VASP: TEBEG
+ensemble = nvt            # type of ensemble,                 in VASP: MDALGO
+timestep = 2              # time for each step in fs,         in VASP: POTIM
+loginterval = 200         # interval for record the log,      in VASP: NBLOCK
+steps = 1050              # number of steps,                  in VASP: NSW
