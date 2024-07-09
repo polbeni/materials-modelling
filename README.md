@@ -21,8 +21,10 @@ The scripts and available content:
    - Generate KPOINTS and INCAR file for a study of energy convergence.
    - Generate POTCAR file.
    - Get the optical and electronic (band gap) properties.
+   - Get effective electron and hole masses from [sumo](https://github.com/SMTG-Bham/sumo).
    - Plot phonon frequencies and phonon density of states from [phonopy](https://phonopy.github.io/phonopy/) results.
    - Get thermal properties from [phonopy](https://phonopy.github.io/phonopy/) results and study diffusion from molecular dynamics simulations.
+   - Execute [DynaPhoPy](https://github.com/abelcarreras/DynaPhoPy) for anharmonic phonon renormalization.
    - Plot electronic density of states (eDOS) with and without thermal correction.
    - Plot energy bands.
    - Compute bond lengths.
