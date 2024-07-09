@@ -1,0 +1,10 @@
+STRUCTURE FILE POSCAR
+/home/pol/Documents/PhD/DynaPhoPy/test-results/cubic-P2_13/results-PBE/input_files/POSCAR
+FORCE SETS
+/home/pol/Documents/PhD/DynaPhoPy/test-results/cubic-P2_13/results-PBE/input_files/FORCE_SETS
+MESH PHONOPY
+50 50 50
+SUPERCELL MATRIX
+2 0 0
+0 2 0
+0 0 2
