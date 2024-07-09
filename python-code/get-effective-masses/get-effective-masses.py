@@ -1,4 +1,4 @@
-# Pol Benítez Colominas, June 2024
+# Pol Benítez Colominas, July 2024
 # Universitat Politècnica de Catalunya
 
 # This code uses sumo to get effective masses and optoelectronic properties and save it in a text file
