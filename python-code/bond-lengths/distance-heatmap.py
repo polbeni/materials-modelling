@@ -83,7 +83,26 @@ for x in range(15):
     
     var_phonon.append(phonon_var)
 
-var_phonon_np = np.array(var_phonon)
+var_phonon_new_order = []
+var_phonon_new_order.append(var_phonon[6])
+var_phonon_new_order.append(var_phonon[7])
+var_phonon_new_order.append(var_phonon[8])
+
+var_phonon_new_order.append(var_phonon[9])
+var_phonon_new_order.append(var_phonon[10])
+var_phonon_new_order.append(var_phonon[11])
+
+var_phonon_new_order.append(var_phonon[0])
+var_phonon_new_order.append(var_phonon[1])
+var_phonon_new_order.append(var_phonon[2])
+var_phonon_new_order.append(var_phonon[3])
+var_phonon_new_order.append(var_phonon[4])
+var_phonon_new_order.append(var_phonon[5])
+var_phonon_new_order.append(var_phonon[12])
+var_phonon_new_order.append(var_phonon[13])
+var_phonon_new_order.append(var_phonon[14])
+
+var_phonon_np = np.array(var_phonon_new_order)
 var_phonon_np = var_phonon_np.T
 
 
@@ -91,24 +110,30 @@ fig, ax = plt.subplots(figsize=(6,4))
 
 cax = ax.imshow(var_phonon_np, cmap='magma', aspect='auto')
 cbar = fig.colorbar(cax, ax=ax)
-cbar.set_label('Bond variation (%)')  # Set your label here
+cbar.set_label('Bond variation (%)', fontsize=12) 
 
 ax.invert_yaxis()
 
 ax.set_title('Ag$_3$SBr')
-ax.set_xlabel('Phonon mode #')
-ax.set_ylabel('Bond')
+ax.set_xlabel('Phonon mode', fontsize=12, labelpad=13)
+ax.set_ylabel('Bond', fontsize=12)
 
-x_ticks = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-x_labels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-ax.set_xticks(ticks=x_ticks, labels=x_labels)
+ax.set_xticks([])
 
 y_ticks = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 y_labels = names_bond
 ax.set_yticks(ticks=y_ticks, labels=y_labels)
 
-major_locator = MultipleLocator(1)  
-ax.xaxis.set_major_locator(major_locator)
+ax.axvline(x=2.5, color='dimgrey', linestyle='-', linewidth=2.5)
+ax.axvline(x=5.5, color='dimgrey', linestyle='-', linewidth=2.5)
+
+ax.axhline(y=2.5, color='dimgrey', linestyle='--', linewidth=1.5)
+ax.axhline(y=3.5, color='dimgrey', linestyle='--', linewidth=1.5)
+ax.axhline(y=6.5, color='dimgrey', linestyle='--', linewidth=1.5)
+
+ax.text(1, -0.65, 'Acoustic', ha='center', va='top', color='black')
+ax.text(4, -0.65, 'Optical NP', ha='center', va='top', color='black')
+ax.text(10, -0.65, 'Optical P', ha='center', va='top', color='black')
 
 plt.tight_layout()
 plt.savefig('bond_variation-Ag3SBr.pdf')
@@ -161,6 +186,27 @@ for x in range(15):
     
     var_phonon.append(phonon_var)
 
+var_phonon_new_order = []
+var_phonon_new_order.append(var_phonon[9])
+var_phonon_new_order.append(var_phonon[10])
+var_phonon_new_order.append(var_phonon[11])
+
+var_phonon_new_order.append(var_phonon[3])
+var_phonon_new_order.append(var_phonon[4])
+var_phonon_new_order.append(var_phonon[5])
+
+var_phonon_new_order.append(var_phonon[0])
+var_phonon_new_order.append(var_phonon[1])
+var_phonon_new_order.append(var_phonon[2])
+var_phonon_new_order.append(var_phonon[6])
+var_phonon_new_order.append(var_phonon[7])
+var_phonon_new_order.append(var_phonon[8])
+var_phonon_new_order.append(var_phonon[12])
+var_phonon_new_order.append(var_phonon[13])
+var_phonon_new_order.append(var_phonon[14])
+
+var_phonon_np = np.array(var_phonon_new_order)
+
 var_phonon_np = np.array(var_phonon)
 var_phonon_np = var_phonon_np.T
 
@@ -169,24 +215,30 @@ fig, ax = plt.subplots(figsize=(6,4))
 
 cax = ax.imshow(var_phonon_np, cmap='magma', aspect='auto')
 cbar = fig.colorbar(cax, ax=ax)
-cbar.set_label('Bond variation (%)')  # Set your label here
+cbar.set_label('Bond variation (%)', fontsize=12) 
 
 ax.invert_yaxis()
 
 ax.set_title('BaTiO$_3$')
-ax.set_xlabel('Phonon mode #')
-ax.set_ylabel('Bond')
+ax.set_xlabel('Phonon mode', fontsize=12, labelpad=13)
+ax.set_ylabel('Bond', fontsize=12)
 
-x_ticks = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-x_labels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-ax.set_xticks(ticks=x_ticks, labels=x_labels)
+ax.set_xticks([])
 
 y_ticks = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 y_labels = names_bond
 ax.set_yticks(ticks=y_ticks, labels=y_labels)
 
-major_locator = MultipleLocator(1)  
-ax.xaxis.set_major_locator(major_locator)
+ax.axvline(x=2.5, color='dimgrey', linestyle='-', linewidth=2.5)
+ax.axvline(x=5.5, color='dimgrey', linestyle='-', linewidth=2.5)
+
+ax.axhline(y=2.5, color='dimgrey', linestyle='--', linewidth=1.5)
+ax.axhline(y=3.5, color='dimgrey', linestyle='--', linewidth=1.5)
+ax.axhline(y=6.5, color='dimgrey', linestyle='--', linewidth=1.5)
+
+ax.text(1, -0.65, 'Acoustic', ha='center', va='top', color='black')
+ax.text(4, -0.65, 'Optical NP', ha='center', va='top', color='black')
+ax.text(10, -0.65, 'Optical P', ha='center', va='top', color='black')
 
 plt.tight_layout()
 plt.savefig('bond_variation-BaTiO3.pdf')
