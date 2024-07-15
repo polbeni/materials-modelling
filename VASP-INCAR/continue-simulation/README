@@ -1,0 +1,1 @@
+To continue a job in VASP save WAVECAR and CHGCAR files in the simulation, and use them in the second part. Also, the new POSCAR = CONTCAR.

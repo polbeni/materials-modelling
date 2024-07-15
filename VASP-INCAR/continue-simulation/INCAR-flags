@@ -1,0 +1,8 @@
+# Use these flags in the first calculation
+LCHARG   =  .TRUE.      # write charge densities
+LWAVE    =  .TRUE.      # write wavefunctions
+
+# Use these flags in the second calculation
+ISTART   =  1           # continue the job (read WAVECAR)
+ICHARG   =  1           # continue the job (read CHGCAR)
+
