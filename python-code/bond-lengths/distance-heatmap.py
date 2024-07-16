@@ -142,7 +142,7 @@ plt.savefig('bond_variation-Ag3SBr.pdf')
 
 #################### BaTiO3 ####################
 
-names_bond = ['Ti-O$_1$', 'Ti-O$_2$', 'Ti-O$_3$', 'Ti-Ba', 'Ba-O$_1$', 'Ba-O$_2$', 'Bo-O$_3$', 
+names_bond = ['Ti-O$_1$', 'Ti-O$_2$', 'Ti-O$_3$', 'Ti-Ba', 'Ba-O$_1$', 'Ba-O$_2$', 'Ba-O$_3$', 
               'O$_1$-O$_2$', 'O$_1$-O$_3$', 'O$_2$-O$_3$']
 
 original_distance = [] # 0:Ti-O1, 1:Ti-O2, 2:Ti-O3, 3:Ti-Ba,  4:Ba-O1, 5:Ba-O2, 6:Ba-O3, 7:O1-O2, 8:O1-O3, 9:O2-O3
@@ -207,7 +207,6 @@ var_phonon_new_order.append(var_phonon[14])
 
 var_phonon_np = np.array(var_phonon_new_order)
 
-var_phonon_np = np.array(var_phonon)
 var_phonon_np = var_phonon_np.T
 
 
