@@ -39,7 +39,7 @@ The scripts and available content:
    - Change the atomic species in POSCAR files.
    - Find new possible structures reached with molecular dynamics simulations.
    - Search in Togo's phonon database [Phonondb](https://github.com/atztogo/phonondb)
-   - Slab calculations.
+   - Band alignments and slab calculations.
 
 
 ## Disclaimer
