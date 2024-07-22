@@ -40,6 +40,7 @@ The scripts and available content:
    - Find new possible structures reached with molecular dynamics simulations.
    - Search in Togo's phonon database [Phonondb](https://github.com/atztogo/phonondb)
    - Band alignments and slab calculations.
+   - Generate solid solution structures.
 
 
 ## Disclaimer
