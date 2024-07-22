@@ -17,6 +17,7 @@ The scripts and available content:
    - Compute the energy bands (with and without hybrid functionals).
    - Compute the charge density.
    - Perform band alignment calculations.
+   - VCA calculations.
 - **Python scripts**: An assortment of Python codes for various purposes. These scripts can:
    - Generate KPOINTS and INCAR files for a study of energy convergence.
    - Generate POTCAR files.
