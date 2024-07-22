@@ -1,0 +1,3 @@
+In the POSCAR file give the same position to the atoms that we will apply VCA approximation
+In the POTCAR file put all the necessary POTCAR files
+In the INCAR define the VCA flag with the desired stoichimetry
