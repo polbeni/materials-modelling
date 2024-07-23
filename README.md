@@ -42,6 +42,7 @@ The scripts and available content:
    - Search in Togo's phonon database [Phonondb](https://github.com/atztogo/phonondb)
    - Band alignments and slab calculations.
    - Generate solid solution structures.
+   - Generate VCA structures.
 
 
 ## Disclaimer
