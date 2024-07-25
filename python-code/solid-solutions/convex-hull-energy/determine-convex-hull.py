@@ -4,20 +4,20 @@ from pymatgen.io.vasp import Poscar
 from pymatgen.io.vasp import Vasprun
 
 compounds = {
-    # primary compounds of CAP materials, energy per atom (eV/1atom)
+    # primary compounds of CAP materials, energy per atom (eV/1atom) times the number of atoms
     'Ag': -3.312115,
     'S': -4.37164,
     'Se': -3.789887187,
     'Br': -1.75290445,
     'I': -1.6907348,
-    'Ag2S': -3.699058833,
-    'Ag2Se': -3.542973417,
-    'AgBr': -2.849598375,
-    'AgI': -2.733631625,
-    'Ag3SBr': -3.2734616,
-    'Ag3SI': -3.2037046,
-    'Ag3SeBr': -3.076793,
-    'Ag3SeI': -3.0271424
+    'Ag2S': -3.699058833*3,
+    'Ag2Se': -3.542973417*3,
+    'AgBr': -2.849598375*2,
+    'AgI': -2.733631625*2,
+    'Ag3SBr': -3.2734616*5,
+    'Ag3SI': -3.2037046*5,
+    'Ag3SeBr': -3.076793*5,
+    'Ag3SeI': -3.0271424*5
 }
 
 # A:Ag, B:S, C:Se, D:Br, E:I, F:Ag2S, G:Ag2Se, H:'AgBr', I:'AgI', J:'Ag3SBr', K:'Ag3SI', L:'Ag3SeBr', M:'Ag3SeI'
@@ -61,8 +61,8 @@ def compute_convex_hull_energy(path_POSCAR, path_INCAR, path_vasprun):
 
     vasprun = Vasprun(path_vasprun)
     energy = float(vasprun.final_energy)
+    print(energy)
     energy_per_atom = energy/total_num_atoms
-    print(energy_per_atom)
 
     atoms_coef = []
     for x in range(len(coefs)):
@@ -112,6 +112,7 @@ def compute_convex_hull_energy(path_POSCAR, path_INCAR, path_vasprun):
 
     reactants = [chem_solid_solution]
     products = list_primary_compounds
+    #print(reactants, products)
 
     coefficients = sp.symbols(f'a:{len(reactants) + len(products)}')
 
@@ -149,14 +150,23 @@ def compute_convex_hull_energy(path_POSCAR, path_INCAR, path_vasprun):
 
     ordered_values = [combined_dict[key] for key in sorted_keys]
 
-    convex_energy = energy_per_atom*ordered_values[0]
+    convex_energy = energy_per_atom*5*ordered_values[0]
+    #print(convex_energy)
 
-    for x in range(len(list_primary_compounds_energy) - 1):
-        convex_energy = convex_energy - list_primary_compounds_energy[x + 1]*ordered_values[x + 1]
+    for x in range(len(list_primary_compounds_energy)):
+        convex_energy = convex_energy - list_primary_compounds_energy[x]*ordered_values[x + 1]
+        #print(convex_energy)
+
+    #print(list_primary_compounds, list_primary_compounds_energy, ordered_values)
 
     return convex_energy
 
-
-path = '../generate-VCA-grid/VCA_structures/vca-001/relaxation/'
+path = '../generate-VCA-grid/VCA_structures/vca-116/relaxation/'
 convex_energy = compute_convex_hull_energy(path + 'POSCAR', path + 'INCAR', path + 'vasprun.xml')
 print(convex_energy)
+
+path = '../generate-VCA-grid/VCA_structures/vca-'
+for x in range(121):
+    path_ss = path + str(x + 1).zfill(3) + '/relaxation/'
+    convex_energy = compute_convex_hull_energy(path_ss + 'POSCAR', path_ss + 'INCAR', path_ss + 'vasprun.xml')
+    print(convex_energy)
