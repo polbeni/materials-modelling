@@ -43,6 +43,8 @@ The scripts and available content:
    - Band alignments and slab calculations.
    - Generate solid solution structures.
    - Generate VCA structures.
+   - Machine Learning methods applied to solid solutions and VCA calculations.
+   - Generate catalysis structures.
 
 
 ## Disclaimer
