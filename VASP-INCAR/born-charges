@@ -1,0 +1,17 @@
+SYSTEM   =  determines the Born effective charges and the static dielectric tensor necessary to compute the LO-TO splitting
+
+LCHARG   =  .FALSE.     # write charge densities
+LWAVE    =  .FALSE.     # write wavefunctions
+
+EDIFF    =  1E-7        # break condition for electronic loop (eV)
+ENCUT    =  650.0       # energy cutoff for the plane-wave basis (eV)
+ISMEAR   =  0           # partial occupancies for each orbital (0->Gaussian smearing)
+SIGMA    =  0.2         # width of the smearing (eV)
+NELM     =  200         # maximum number of electronic steps
+
+IBRION   =  6           # how the ions are updated and moved
+LCALCEPS =  .TRUE.      # to determine static dielectric tensor and Born effective charge tensors
+
+ALGO     =  Normal      # electronic optimization algorithm
+
+GGA      =  PS          # type of LDA or GGA exchange-correlation functional
