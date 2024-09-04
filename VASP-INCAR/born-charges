@@ -9,8 +9,8 @@ ISMEAR   =  0           # partial occupancies for each orbital (0->Gaussian smea
 SIGMA    =  0.2         # width of the smearing (eV)
 NELM     =  200         # maximum number of electronic steps
 
-IBRION   =  6           # how the ions are updated and moved
-LCALCEPS =  .TRUE.      # to determine static dielectric tensor and Born effective charge tensors
+IBRION   =  8           # how the ions are updated and moved
+LEPSILON =  .TRUE.      # to determine the static dielectric constant
 
 ALGO     =  Normal      # electronic optimization algorithm
 
