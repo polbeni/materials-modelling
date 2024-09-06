@@ -20,6 +20,7 @@ The scripts and available content:
    - VCA calculations.
 - **Quantum ESPRESSO input files**: Input files to perform DFT calculations with [Quantum ESPRESSO](https://www.quantum-espresso.org/) software. The input files available can be used to:
    - Single point energy calculations.
+   - Ionic relaxations.
 - **Python scripts**: An assortment of Python codes for various purposes. These scripts can:
    - Generate KPOINTS and INCAR files for a study of energy convergence.
    - Generate POTCAR files.
