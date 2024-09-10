@@ -1,0 +1,45 @@
+&control
+ calculation = 'scf'                              ! type of calculation
+ prefix = 'Ag3SBr'                                ! prefix for the output files
+ restart_mode = 'from_scratch'                    ! start from zero or restart a calculation
+ pseudo_dir = '../pp'                             ! name of the directory containing the pseudopotential files
+ outdir = './'                                    ! name of the directory where the output files are found
+ verbosity = 'low'                                ! level of verbosity of the output file
+ tprnfor = .true.                                 ! calculates forces
+ tstress = .true.                                 ! calculates stress
+/
+
+&system
+ ibrav = 0                                        ! type of bravais-lattice, if 0 the lattice is provided in CELL_PARAMETERS
+ nat = 5                                          ! number of atoms in the unit cell
+ ntyp = 3                                         ! number of types of atoms in the unit cell
+ ecutwfc = 48.0                                   ! kinetic energy cutoff for wavefunctions (in Ry)
+ occupations = 'fixed'                            ! electronic occupations
+ smearing = 'gaussian'                            ! type of smearing
+ input_dft = 'pbesol'                             ! type of exchange-correlation functional
+/
+
+&electrons
+ conv_thr = 1.0e-8                                ! convergence threshold for the electronic loop
+/
+
+ATOMIC_SPECIES                                    ! atomic species, atomic mass, and name of the pseudopotential file
+ Ag    107.8682    Ag_ONCV_PBE-1.0.oncvpsp.upf
+ S     32.065      s_pbe_v1.4.uspp.F.UPF
+ Br    79.904      br_pbe_v1.4.uspp.F.UPF
+
+K_POINTS (automatic)                              ! number of k-points
+ 8 8 8 0 0 0
+
+CELL_PARAMETERS (angstrom)
+   4.791818417   0.000000000   0.000000000
+   0.000000000   4.791818417   0.000000000
+   0.000000000   0.000000000   4.791818417
+
+ATOMIC_POSITIONS (crystal)
+Ag            0.5000000000        0.5000000000        0.0000000000
+Ag            0.5000000000        0.0000000000        0.5000000000
+Ag            0.0000000000        0.5000000000        0.5000000000
+S             0.5000000000        0.5000000000        0.5000000000
+Br            0.0000000000       -0.0000000000        0.0000000000
+

@@ -1,0 +1,13 @@
+--
+&inputph
+  prefix   = 'Ag3SBr'
+  epsil    = .false.
+  fildyn   = 'Ag3SBr.dyn'
+  ldisp    = .true.
+  fildvscf = 'dvscf'
+  nq1=8,
+  nq2=8,
+  nq3=8,
+  tr2_ph   =  1.0d-12
+ /
+
