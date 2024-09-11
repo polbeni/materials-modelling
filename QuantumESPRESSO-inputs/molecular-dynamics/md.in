@@ -1,0 +1,91 @@
+&control
+ calculation = 'md'                               ! type of calculation
+ prefix = 'Ag3SBr'                                ! prefix for the output files
+ restart_mode = 'from_scratch'                    ! start from zero or restart a calculation
+ pseudo_dir = '../pp'                             ! name of the directory containing the pseudopotential files
+ outdir = './'                                    ! name of the directory where the output files are found
+ verbosity = 'low'                                ! level of verbosity of the output file
+ tprnfor = .true.                                 ! calculates forces
+ tstress = .true.                                 ! calculates stress
+ nstep = 1000                                     ! number of steps in the md simulation
+ iprint = 10                                      ! in md trajectory is written every iprint steps
+ dt = 30                                          ! time of the step (in Rydberg units), 1 a.u. = 0.048378 fs
+/
+
+&system
+ ibrav = 0                                        ! type of bravais-lattice, if 0 the lattice is provided in CELL_PARAMETERS
+ nat = 40                                         ! number of atoms in the unit cell
+ ntyp = 3                                         ! number of types of atoms in the unit cell
+ ecutwfc = 48.0                                   ! kinetic energy cutoff for wavefunctions (in Ry)
+ occupations = 'fixed'                            ! electronic occupations
+ smearing = 'gaussian'                            ! type of smearing
+ input_dft = 'pbesol'                             ! type of exchange-correlation functional
+/
+
+&electrons
+ conv_thr = 1.0e-8                                ! convergence threshold for the electronic loop
+/
+
+&ions
+ ion_positions = 'default'                        ! if restarting the calculation, uses the previous positions
+ ion_velocities = 'default'                       ! if restarting the calculation, uses the previous velocities
+ ion_dynamics = 'verlet'                          ! type of ion dynamics
+ pot_extrapolation = 'second_order'               ! extrapolate the potential from previous ionic steps
+ wfc_extrapolation = 'second_order'               ! extrapolate the wave functions from previous ionic steps
+ tempw = 300                                      ! temperature for the md simulation (Kelvin)
+/
+
+ATOMIC_SPECIES                                    ! atomic species, atomic mass, and name of the pseudopotential file
+ Ag    107.8682    Ag_ONCV_PBE-1.0.oncvpsp.upf
+ S     32.065      s_pbe_v1.4.uspp.F.UPF
+ Br    79.904      br_pbe_v1.4.uspp.F.UPF
+
+K_POINTS (automatic)                              ! number of k-points
+ 4 4 4 0 0 0
+
+CELL_PARAMETERS (angstrom)
+   9.586104603   0.000000000   0.000000000
+   0.000000000   9.586104603   0.000000000
+   0.000000000   0.000000000   9.586104603
+
+ATOMIC_POSITIONS (crystal)
+Ag            0.2500000000000000  0.2500000000000000  0.0000000000000000
+Ag            0.7500000000000000  0.2500000000000000  0.0000000000000000
+Ag            0.2500000000000000  0.7500000000000000  0.0000000000000000
+Ag            0.7500000000000000  0.7500000000000000  0.0000000000000000
+Ag            0.2500000000000000  0.2500000000000000  0.5000000000000000
+Ag            0.7500000000000000  0.2500000000000000  0.5000000000000000
+Ag            0.2500000000000000  0.7500000000000000  0.5000000000000000
+Ag            0.7500000000000000  0.7500000000000000  0.5000000000000000
+Ag            0.2500000000000000  0.0000000000000000  0.2500000000000000
+Ag            0.7500000000000000  0.0000000000000000  0.2500000000000000
+Ag            0.2500000000000000  0.5000000000000000  0.2500000000000000
+Ag            0.7500000000000000  0.5000000000000000  0.2500000000000000
+Ag            0.2500000000000000  0.0000000000000000  0.7500000000000000
+Ag            0.7500000000000000  0.0000000000000000  0.7500000000000000
+Ag            0.2500000000000000  0.5000000000000000  0.7500000000000000
+Ag            0.7500000000000000  0.5000000000000000  0.7500000000000000
+Ag            0.0000000000000000  0.2500000000000000  0.2500000000000000
+Ag            0.5000000000000000  0.2500000000000000  0.2500000000000000
+Ag            0.0000000000000000  0.7500000000000000  0.2500000000000000
+Ag            0.5000000000000000  0.7500000000000000  0.2500000000000000
+Ag            0.0000000000000000  0.2500000000000000  0.7500000000000000
+Ag            0.5000000000000000  0.2500000000000000  0.7500000000000000
+Ag            0.0000000000000000  0.7500000000000000  0.7500000000000000
+Ag            0.5000000000000000  0.7500000000000000  0.7500000000000000
+S             0.2500000000000000  0.2500000000000000  0.2500000000000000
+S             0.7500000000000000  0.2500000000000000  0.2500000000000000
+S             0.2500000000000000  0.7500000000000000  0.2500000000000000
+S             0.7500000000000000  0.7500000000000000  0.2500000000000000
+S             0.2500000000000000  0.2500000000000000  0.7500000000000000
+S             0.7500000000000000  0.2500000000000000  0.7500000000000000
+S             0.2500000000000000  0.7500000000000000  0.7500000000000000
+S             0.7500000000000000  0.7500000000000000  0.7500000000000000
+Br            0.0000000000000000  0.0000000000000000  0.0000000000000000
+Br            0.5000000000000000  0.0000000000000000  0.0000000000000000
+Br            0.0000000000000000  0.5000000000000000  0.0000000000000000
+Br            0.5000000000000000  0.5000000000000000  0.0000000000000000
+Br            0.0000000000000000  0.0000000000000000  0.5000000000000000
+Br            0.5000000000000000  0.0000000000000000  0.5000000000000000
+Br            0.0000000000000000  0.5000000000000000  0.5000000000000000
+Br            0.5000000000000000  0.5000000000000000  0.5000000000000000
