@@ -7,6 +7,6 @@
 
 import subprocess
 
-dynaphopy_command = 'dynaphopy input XDATCAR-file -ts 0.0015 -sfc FORCE_CONSTANTS'
+dynaphopy_command = 'dynaphopy input XDATCAR-file -ts 0.0015 -sfc FORCE_CONSTANTS -psm 2'
 
 result = subprocess.run(dynaphopy_command, shell=True, capture_output=True, text=True)
