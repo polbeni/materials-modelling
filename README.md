@@ -50,6 +50,7 @@ The scripts and available content:
    - Generate VCA structures.
    - Machine Learning methods applied to solid solutions and VCA calculations.
    - Generate catalysis structures.
+   - Compute the Fröhlich coupling correction to the band gap for polar materials.
 
 
 ## Disclaimer
