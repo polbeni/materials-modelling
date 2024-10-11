@@ -51,6 +51,8 @@ The scripts and available content:
    - Machine Learning methods applied to solid solutions and VCA calculations.
    - Generate catalysis structures.
    - Compute the Fröhlich coupling correction to the band gap for polar materials.
+   - Distort an structure given a phonon mode eigenvectors and an amplitude.
+   - Compute the dielectric constant for an anisotropic dielectric tensor and compute the thermal average for a given T.
 
 
 ## Disclaimer
