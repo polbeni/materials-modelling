@@ -8,13 +8,13 @@ from scipy.interpolate import interp1d
 
 ####################################################### IMPORTANT #######################################################
 # give the path to the OUTCAR file
-path_results = 'non-hybrid-bands/step2/OUTCAR' # path to OUTCAR
+path_results = 'hybrids/step2/OUTCAR' # path to OUTCAR
 
 # define here the k-path looking at the OUTCAR or KPOITNS files, the number in the k_points_in_path correspond 
 # to their position in the files, starting from 0. Then give a name to these points.
-k_points_in_path = [[0, 1, 2, 3, 4, 5, 6], [6, 15, 18], [18, 16, 12, 7, 0]] # index of k-points of interest
-sym_points_in_path = [0, 6, 18, 0] # index of high symmetry points in the path
-names_sym_points = ['$\\Gamma$', 'M', 'K', '$\\Gamma$'] # names of the high symmetry points
+k_points_in_path = [[0, 1, 2, 3, 4, 5], [5, 11, 17, 23, 29, 35], [35, 34, 33, 32, 31, 30], [30, 24, 18, 12, 6, 0]] # index of k-points of interest
+sym_points_in_path = [0, 5, 35, 30, 0] # index of high symmetry points in the path
+names_sym_points = ['$\\Gamma$', 'X', 'S', 'Y', '$\\Gamma$'] # names of the high symmetry points
 
 # define the density of your k_point mesh
 mesh_density = 1000 # number of points in the interpolated k-path
@@ -154,10 +154,10 @@ def find_minCB_maxVB(fermi_energy, bands):
     for band in bands:
         it_el = 0
         for element in band:
-            if ((element - fermi_energy) < (minCB - fermi_energy)) and ((element - fermi_energy) > 0):
+            if (abs(element - fermi_energy) < abs(minCB - fermi_energy)) and (abs(element - fermi_energy) > 5e-2) and (element > fermi_energy):
                 minCB = element
                 k_CB = it_el
-            if ((fermi_energy - element) < (fermi_energy - maxVB)) and ((fermi_energy - element) > 0):
+            if (abs(element - fermi_energy) < abs(maxVB - fermi_energy)) and (abs(element - fermi_energy) > 5e-2) and (element < fermi_energy):
                 maxVB = element
                 k_VB = it_el
 
