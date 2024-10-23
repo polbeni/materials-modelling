@@ -53,6 +53,7 @@ The scripts and available content:
    - Compute the Fröhlich coupling correction to the band gap for polar materials.
    - Distort an structure given a phonon mode eigenvectors and an amplitude.
    - Compute the dielectric constant for an anisotropic dielectric tensor and compute the thermal average for a given T.
+   - Generate distorted structures with uniform or gaussian noise for each atom.
 
 
 ## Disclaimer
