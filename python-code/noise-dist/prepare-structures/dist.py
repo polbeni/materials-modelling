@@ -15,8 +15,8 @@ from pymatgen.io.vasp import Poscar
 
 material = ['Ag3SBr', 'Ag3SI']
 supercell = ['1x1x1', '2x2x2']
-width_disp = [0.5, 0.9, 1.3, 1.7] # standard deviation (width) of the gaussian noise
-number_for_each = 5
+width_disp = [0.3, 0.6, 0.9, 1.2] # standard deviation (width) of the gaussian noise
+number_for_each = 6
 
 path_to_save = 'generated-structures'    # path to save the resulting structures
 
@@ -80,16 +80,14 @@ for mat in material:
                 destination = path_to_save + '/struc-' + str(num_struc).zfill(3) + '/HSEsol/run.sh'
                 shutil.copy(source, destination)
 
-                num_struc = num_struc + 1
-
-                send_jobs.write('cd ' + '/struc-' + str(num_struc).zfill(3) + '/PBEsol' + ' \n')
+                send_jobs.write('cd ' + 'struc-' + str(num_struc).zfill(3) + '/PBEsol' + ' \n')
                 send_jobs.write('sbatch run.sh \n')
                 send_jobs.write('cd ../HSEsol \n')
                 send_jobs.write('sbatch run.sh \n')
                 send_jobs.write('cd ../.. \n')
                 send_jobs.write('\n')
 
-                check_results.write('cd ' + '/struc-' + str(num_struc).zfill(3) + '/PBEsol' + ' \n')
+                check_results.write('cd ' + 'struc-' + str(num_struc).zfill(3) + '/PBEsol' + ' \n')
                 check_results.write('echo ' + 'struc-' + str(num_struc).zfill(3) + ' PBEsol' + '\n')
                 check_results.write('tail -n 1 OSZICAR \n')
                 check_results.write('cd ../HSEsol \n')
@@ -97,6 +95,8 @@ for mat in material:
                 check_results.write('tail -n 1 OSZICAR \n')
                 check_results.write('cd ../.. \n')
                 check_results.write('\n')
+
+                num_struc = num_struc + 1
 
 os.system("chmod +x " + path_to_save + "/send_jobs.sh")
 os.system("chmod +x " + path_to_save + "/check_results.sh") 
