@@ -1,0 +1,4 @@
+&INPUT
+    fildyn = 'SnSe.dyn'             ! Input dynamical matrix file from ph.x
+    flfrc = 'SnSe.fc'               ! Output file for force constants
+/

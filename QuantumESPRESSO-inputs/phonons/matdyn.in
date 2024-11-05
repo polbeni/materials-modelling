@@ -1,0 +1,11 @@
+&INPUT
+    flfrc = 'SnSe.fc'               ! Force constants file from Q2R
+    flfrq = 'SnSe.freq'             ! Output file for phonon frequencies
+    q_in_band_form = .true.         ! q-point input in band form for dispersion
+/
+25  ! Number of q-points in the path
+0.0 0.0 0.0    ! q-point at Gamma
+0.5 0.0 0.0    ! q-point at X
+0.5 0.0 0.5    ! q-point at S
+0.0 0.0 0.5    ! q-point at Y
+0.0 0.0 0.0    ! q-point at Gamma
