@@ -29,6 +29,7 @@ The scripts and available content:
    - Get the optical and electronic (band gap) properties.
    - Calculate effective electron and hole masses using [sumo](https://github.com/SMTG-Bham/sumo).
    - Plot phonon frequencies and phonon density of states from [phonopy](https://phonopy.github.io/phonopy/) results.
+   - Plot phonon frequencies from QuantumESPRESSO calculations.
    - Obtain thermal properties from [phonopy](https://phonopy.github.io/phonopy/) results and study diffusion from molecular dynamics simulations.
    - Execute [DynaPhoPy](https://github.com/abelcarreras/DynaPhoPy) for anharmonic phonon renormalization.
    - Plot electronic density of states (eDOS) with and without thermal correction.
