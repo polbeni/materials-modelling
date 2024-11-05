@@ -1,10 +1,11 @@
  &input
     flfrc = 'TiS2.fc'               ! Force constants file from Q2R
     flfrq = 'TiS2.freq'             ! Output file for phonon frequencies
-    amass(1) = 47.867
-    amass(2) = 32.065
+    amass(1) = 47.867               ! atomic mass of ntype atom 1
+    amass(2) = 32.065               ! atomic mass of ntype atom 2
     q_in_band_form = .true.         ! q-point input in band form for dispersion
- /
+    q_in_cryst_coord = .true.       ! q-points referred to crystal structure 
+/
 4  ! Number of q-points in the path
 0.0 0.0 0.0    5          ! q-point at Gamma
 0.5 0.0 0.0    5          ! q-point at X
