@@ -1,11 +1,12 @@
-&INPUT
-    flfrc = 'SnSe.fc'               ! Force constants file from Q2R
-    flfrq = 'SnSe.freq'             ! Output file for phonon frequencies
+ &input
+    flfrc = 'TiS2.fc'               ! Force constants file from Q2R
+    flfrq = 'TiS2.freq'             ! Output file for phonon frequencies
+    amass(1) = 47.867
+    amass(2) = 32.065
     q_in_band_form = .true.         ! q-point input in band form for dispersion
-/
-25  ! Number of q-points in the path
-0.0 0.0 0.0    ! q-point at Gamma
-0.5 0.0 0.0    ! q-point at X
-0.5 0.0 0.5    ! q-point at S
-0.0 0.0 0.5    ! q-point at Y
-0.0 0.0 0.0    ! q-point at Gamma
+ /
+4  ! Number of q-points in the path
+0.0 0.0 0.0    5          ! q-point at Gamma
+0.5 0.0 0.0    5          ! q-point at X
+0.333333 0.333333 0.0   5 ! q-point at K
+0.0 0.0 0.0    1          ! q-point at Gamma
