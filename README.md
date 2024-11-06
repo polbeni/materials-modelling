@@ -55,6 +55,7 @@ The scripts and available content:
    - Distort an structure given a phonon mode eigenvectors and an amplitude.
    - Compute the dielectric constant for an anisotropic dielectric tensor and compute the thermal average for a given T.
    - Generate distorted structures with uniform or gaussian noise for each atom.
+   - Get POSCAR from a phonopy.yaml file.
 
 
 ## Disclaimer
