@@ -1,4 +1,4 @@
-# Pol Benítez Colominas, September-October 2024
+# Pol Benítez Colominas, November 2024
 # University of Cambridge and Universitat Politècnica de Catalunya
 
 # Plot the valence band and conduction band in the full Brillouin zone for 2D materials
