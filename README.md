@@ -56,6 +56,7 @@ The scripts and available content:
    - Compute the dielectric constant for an anisotropic dielectric tensor and compute the thermal average for a given T.
    - Generate distorted structures with uniform or gaussian noise for each atom.
    - Get POSCAR from a phonopy.yaml file.
+   - Plot a given band in the full Brillouin zone of a 2D material.
 
 
 ## Disclaimer
