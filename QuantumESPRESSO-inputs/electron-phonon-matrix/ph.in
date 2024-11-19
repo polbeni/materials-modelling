@@ -1,0 +1,16 @@
+
+&inputph
+
+tr2_ph=1.0d-15
+amass(1) = 47.867
+amass(2) = 32.065
+prefix='TiS2'
+outdir='tmp_dir'
+fildyn='TiS2_elecphonon.dyn'
+fildvscf = 'dvscf'
+electron_phonon='prt'
+kx = 0.0000000
+ky = 0.0962250
+kz = 0.0000000
+/
+0.1 0.1 0.0

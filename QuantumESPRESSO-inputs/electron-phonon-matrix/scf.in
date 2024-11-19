@@ -1,0 +1,39 @@
+&CONTROL
+ calculation = 'scf',                             ! type of calculation
+ restart_mode = 'from_scratch',                   ! start from zero or restart a calculation
+ outdir = 'tmp_dir',                                   ! name of the directory where the output files are found
+ pseudo_dir = './pseudo',                         ! name of the directory containing the pseudopotential files
+ verbosity = 'high',                              ! level of verbosity of the output file
+ prefix = 'TiS2',                                 ! prefix for the output files
+/
+
+&SYSTEM
+ ibrav = 0,                                       ! type of bravais-lattice, if 0 the lattice is provided in CELL_PARAMETERS
+ nat = 3,                                         ! number of atoms in the unit cell
+ ntyp = 2,                                        ! number of types of atoms in the unit cell
+ ecutwfc = 48.0,                                  ! kinetic energy cutoff for wavefunctions (in Ry)
+ occupations  = 'smearing'
+ degauss  = 0.001
+ input_dft = 'pbesol',                            ! type of exchange-correlation functional
+/
+
+&ELECTRONS
+ conv_thr = 1.0e-8,                               ! convergence threshold for the electronic loop
+/
+
+ATOMIC_SPECIES                                    ! atomic species, atomic mass, and name of the pseudopotential file
+ Ti    47.867      Ti-nc-sr-04_pbesol_stringent.upf
+ S     32.065      S-nc-sr-04_pbesol_stringent.upf
+
+ATOMIC_POSITIONS (crystal)                        ! atomic positions for each atomic species
+ Ti           -0.0000000000       -0.0000000000        0.5000000000
+ S             0.6666666870        0.3333333430        0.5836696329
+ S             0.6666666870        0.3333333430        0.4163303671
+
+K_POINTS (automatic)                              ! number of k-points
+ 12 12 1 0 0 0
+
+CELL_PARAMETERS (angstrom)                        ! parameters of the cell
+   3.286803804  -0.000000000  -0.000000000
+  -1.643401902   2.846455592  -0.000000000
+   0.000000000   0.000000000  17.982637139

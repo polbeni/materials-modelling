@@ -1,0 +1,5 @@
+in ph.in the flag electron_phonon should take the argument 'prt' (this prints the electron-phonon matrix elements in the ph.out)
+
+kx, ky, kz, is the k-point in the FBZ for what we want the e-p values (it has to be in the k-mesh defined in the scf.in step)
+
+after / in the final line we should put the q wave-vector of the phonon
