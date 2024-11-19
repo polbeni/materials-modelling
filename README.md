@@ -23,6 +23,7 @@ The scripts and available content:
    - Ionic relaxations.
    - Phonon calculations.
    - Molecular dynamics calculations.
+   - Determine the electron-phonon matrix elements.
 - **Python scripts**: An assortment of Python codes for various purposes. These scripts can:
    - Generate KPOINTS and INCAR files for a study of energy convergence.
    - Generate POTCAR files.
