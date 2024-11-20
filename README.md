@@ -58,6 +58,7 @@ The scripts and available content:
    - Generate distorted structures with uniform or gaussian noise for each atom.
    - Get POSCAR from a phonopy.yaml file.
    - Plot a given band in the full Brillouin zone of a 2D material.
+   - Prepare calculations to compute e-p matrix elements with QuantumESPRESSO.
 
 
 ## Disclaimer
