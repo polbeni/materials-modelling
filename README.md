@@ -59,6 +59,7 @@ The scripts and available content:
    - Get POSCAR from a phonopy.yaml file.
    - Plot a given band in the full Brillouin zone of a 2D material.
    - Prepare calculations to compute e-p matrix elements with QuantumESPRESSO.
+   - Cut XDATCAR file.
 
 
 ## Disclaimer
