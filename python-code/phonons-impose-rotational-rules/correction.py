@@ -2,7 +2,7 @@
 # Universitat Politècnica de Catalunya
 
 # Impose rotational sum rules to a FORCE_CONSTANTS file using hiphive software
-# We need to provide the following files: POSCAR, FORCE_CONSTANTS
+# We need to provide the following files: POSCAR, SPOSCAR, FORCE_CONSTANTS
 # We need to provide the following parameters:
 #       supercell_matrix -> dimension of the supercell
 #       cutoffs -> cutoff value for the cluster space, just to second order force constants
