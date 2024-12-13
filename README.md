@@ -60,6 +60,7 @@ The scripts and available content:
    - Plot a given band in the full Brillouin zone of a 2D material.
    - Prepare calculations to compute e-p matrix elements with QuantumESPRESSO.
    - Cut XDATCAR file.
+   - Impose rotational sum rules to phonon force constants.
 
 
 ## Disclaimer
