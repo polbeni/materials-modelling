@@ -22,9 +22,9 @@ def get_pDOS(path_file):
 
             s_dos.append(float(line.split()[1]))
 
-            py = float(line.split()[5])
-            pz = float(line.split()[5])
-            px = float(line.split()[5])
+            py = float(line.split()[2])
+            pz = float(line.split()[3])
+            px = float(line.split()[4])
             p_dos.append(py + pz + px)
 
             dxy = float(line.split()[5])
@@ -130,8 +130,8 @@ axs[1].set_ylabel('eDOS (a.u.)')
 
 axs[0].set_xlim(-4, 6)
 axs[1].set_xlim(-4, 6)
-axs[0].set_ylim(0, 3)
-axs[1].set_ylim(0, 3)
+axs[0].set_ylim(0, 2)
+axs[1].set_ylim(0, 2)
 
 it_color = 0
 for atom in list_of_atoms:
