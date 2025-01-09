@@ -1,19 +1,58 @@
-# Pol Benítez Colominas, November 2024
-# University of Cambridge and Universitat Politècnica de Catalunya
+def electronic_bandGap(file_name):
+    """
+    This functions uses DOSCAR file generated in VASP simulations and returns the Fermi energy
+    the band gap, and the energies of the band gap (respect the exchange-correlation functional
+    used).
 
-# Determine the band gap from vasprun.xml file using pymatgen module
+    file_name: path of the DOSCAR file
+    """
+    
+    file = open(file_name, "r")
 
-from pymatgen.io.vasp.outputs import Vasprun
+    for x in range(6):
+        actual_string = file.readline()
+        if x == 5:
+            fermiEnergy = float(actual_string.split()[3])
 
-# Load the vasprun.xml file
-vasprun = Vasprun("vasprun.xml")
+    file.close()
 
-# Extract the band structure
-band_structure = vasprun.get_band_structure()
+    file = open(file_name, "r")
 
-# Calculate the band gap
-band_gap = band_structure.get_band_gap()
+    for x in range(6):
+        file.readline()
 
-# Print the results
-print(f"Band gap type: {band_gap['direct']}")
-print(f"Band gap energy (eV): {band_gap['energy']}")
+    for x in file:
+        actual_string = x
+
+        if (float(actual_string.split()[0]) <= fermiEnergy+0.1) and (float(actual_string.split()[0]) >= fermiEnergy-0.1):
+            density_bandGap = float(actual_string.split()[2])
+
+            break
+
+    file.close()
+
+    file = open(file_name, "r")
+
+    for x in range(6):
+        file.readline()
+
+    for x in file:
+        actual_string = x
+
+        if float(actual_string.split()[2]) == density_bandGap:
+            minEnergy = float(actual_string.split()[0])
+
+            break   
+
+    for x in file:
+        actual_string = x
+
+        if float(actual_string.split()[2]) != density_bandGap:
+            maxEnergy = float(actual_string.split()[0])
+
+            break 
+    bandGap = maxEnergy - minEnergy
+
+    file.close()
+    
+    return fermiEnergy, minEnergy, maxEnergy, bandGap
