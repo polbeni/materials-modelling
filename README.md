@@ -61,6 +61,7 @@ The scripts and available content:
    - Prepare calculations to compute e-p matrix elements with QuantumESPRESSO.
    - Cut XDATCAR file.
    - Impose rotational sum rules to phonon force constants.
+   - Study phonon mode modulus difference above and below a phonon gap.
 
 
 ## Disclaimer
