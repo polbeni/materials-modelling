@@ -1,3 +1,10 @@
+# Pol Benítez Colominas, Jan 2025
+# Universitat Politècnica de Catalunya
+
+# Computes the modulus of each phonon mode eigenvector and plots it in a heat map
+# With this we can study the difference in modulus between phonon modes above and
+# below the phonon gap
+
 import numpy as np
 import matplotlib.pyplot as plt
 
