@@ -1,9 +1,21 @@
-def generate_POSCAR(input_file, num_chemical, num_config, output_file):
+# Pol Benítez Colominas, Sep 2023 - Jan 2025
+# Universitat Politècnica de Catalunya
+
+# Get POSCAR structures from a XDATCAR file
+# The XDATCAR file should be in the same path
+
+############### INPUTS ###############
+initial_step = 10                  # initial step to consider in the XDATCAR
+final_step = 40                    # last step to consider in the XDATCAR
+number_of_POSCAR = 15              # total number of POSCAR to generate, it has to be < (final_step-initial_step)
+path_to_save = 'generated_POSCAR'  # dir to save the generated POSCAR files
+######################################
+
+def generate_POSCAR(input_file, num_config, output_file):
     """
     This function generates a POSCAR from the XDATCAR file
     
     input_file: name or path of the input file, it should be a XDATCAR file
-    num_chemical: number of different chemical species in the POSCAR
     num_config: number of the configuration at the XDATCAR file
     output_file: name of the output file, a new POSCAR with the positions of the num_config configuration
     """
@@ -14,7 +26,7 @@ def generate_POSCAR(input_file, num_chemical, num_config, output_file):
         number_atoms_line = XDATCAR.readline()
 
     number_atoms = 0
-    for x in range(num_chemical):
+    for x in range(len(number_atoms_line.split())):
         number_atoms = number_atoms + int(number_atoms_line.split()[x])
 
     XDATCAR.close()
@@ -24,10 +36,7 @@ def generate_POSCAR(input_file, num_chemical, num_config, output_file):
 
     for x in range(7):
         XDATCAR_line = XDATCAR.readline()
-        if x < 5:
-            new_POSCAR.writelines(XDATCAR_line)
-        else:
-            new_POSCAR.writelines(str(XDATCAR_line.split()[0]) + ' ' + str(XDATCAR_line.split()[1]) + ' ' + str(XDATCAR_line.split()[2]) + '\n')
+        new_POSCAR.writelines(XDATCAR_line)
 
     new_POSCAR.writelines('Direct \n')
 
@@ -57,13 +66,13 @@ def generate_POSCAR(input_file, num_chemical, num_config, output_file):
     return print(f'POSCAR generated from Direct configuration={num_config} in the provided XDATCAR file')
 
 
-num_POSCAR = 30000
+num_POSCAR = initial_step
 
-for x in range(10):
-    name_file = 'generated_POSCAR/POSCAR-' + "{:03d}".format(x+1)
+for configuration in range(number_of_POSCAR):
+    name_file = path_to_save + '/POSCAR-' + "{:05d}".format(configuration + 1)
     
-    num_POSCAR = num_POSCAR + (60000 - 30000)/10
+    num_POSCAR = num_POSCAR + int((final_step - initial_step) / number_of_POSCAR)
 
-    print('POSCAR-' + "{:03d}".format(x+1) + ':')
-    generate_POSCAR('XDATCAR_merged', 3, num_POSCAR, name_file)
+    print('POSCAR-' + "{:05d}".format(configuration + 1) + ':')
+    generate_POSCAR('XDATCAR', num_POSCAR, name_file)
     print(' ')
