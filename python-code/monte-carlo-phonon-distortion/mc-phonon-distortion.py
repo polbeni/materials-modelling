@@ -94,7 +94,7 @@ def disp_vect(number_atoms, number_q, number_mu, eigenvalues_list, eigenvectors_
 
 def get_phonopy(path_file):
     """
-    It extracts the number of q-points, and the eigenvalues and eigenvectors for each q-point,
+    It extracts the number of atoms and q-points, and the eigenvalues and eigenvectors for each q-point,
     from mesh.yaml phonopy output file. It also extracts the atomic masses of the atoms
 
     Inputs:
@@ -106,6 +106,7 @@ def get_phonopy(path_file):
 
     number_phonons = data['natom'] * 3
 
+    number_atoms = data['natom']
     number_q = data['nqpoint']
     eigenvalues = []
     eigenvectors = []
@@ -136,17 +137,53 @@ def get_phonopy(path_file):
     for atom in range(number_phonons // 3):
         mass_list.append(data['points'][atom]['mass'])
 
-    return number_q, eigenvalues, eigenvectors, mass_list
+    return number_atoms, number_q, eigenvalues, eigenvectors, mass_list
+
+def new_POSCAR(old_path, disp_vec, new_path):
+    """
+    Applies the find vector displacement to a given POSCAR
+
+    Inputs:
+        old_path -> path to the old POSCAR file (IN CARTESIAN COORDINATES!!!!!)
+        disp_vec -> generated displacement vector
+        new_path -> path to the new distorted structure
+    """
+    old = open(old_path, 'r')
+    new = open(new_path, 'w')
+
+    for _ in range(7):
+        line = old.readline()
+        new.write(line)
+
+    num_atoms = 0
+    for it in range(len(line.split())):
+        num_atoms = num_atoms + int(line.split()[it])
+
+    line = old.readline()
+    new.write(line)
+
+    for atom in range(num_atoms):
+        line = old.readline()
+
+        pos_x = float(line.split()[0]) + disp_vec[atom][0]
+        pos_y = float(line.split()[1]) + disp_vec[atom][1]
+        pos_z = float(line.split()[2]) + disp_vec[atom][2]
+
+        new.write(f'     {pos_x:.9f}     {pos_y:.9f}     {pos_z:.9f}\n')
+
+    old.close()
+    new.close()
 
 
 ### Code
-nq, values, vectors, masses = get_phonopy('phonon-data/anharmonic-T200-nac/mesh.yaml')
+# Read the mesh.yaml file and obtain phonon data
+num_atoms, nq, values, vectors, masses = get_phonopy('phonon-data/anharmonic-T200-nac/mesh.yaml')
 
-result = disp_vect(5, nq, 15, values, vectors, masses, 10)
-print(result)
+# Generate a number of Monte Carlo distorted structures and save them in the desired path
+path_to_save = 'distorted_structures/'
+number_of_structures = 100
 
-result = disp_vect(5, nq, 15, values, vectors, masses, 100)
-print(result)
-
-result = disp_vect(5, nq, 15, values, vectors, masses, 1000)
-print(result)
+for num_struc in range(number_of_structures):
+    result = disp_vect(num_atoms, nq, num_atoms*3, values, vectors, masses, 600)
+    path_new = path_to_save + 'POSCAR-' + str(num_struc + 1).zfill(4)
+    new_POSCAR('POSCAR.vasp', result, path_new)
