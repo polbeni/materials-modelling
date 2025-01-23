@@ -26,21 +26,23 @@ def bose_einstein(temperature, phonon_energy):
 
     return distribution
 
-def phonon_amplitude(temperature, phonon_energy):
+def phonon_amplitude(temperature, phonon_energy, atom_mass):
     """
     Computes the phonon amplitude for a given temperature and phonon mode mu at q
 
     Inputs:
         temperature -> temperature (in K)
         phonon_energy -> energy of the given phonon (in s^-1 (Hz))
+        atom_mass -> atomic mass of the given atom
     """
 
     dist = bose_einstein(temperature, phonon_energy)
 
     h_si = reduced_planck_ct * 6.24e-18 # in J·s
-    #mass = 1.79e-25 # silver atomic mass in kg
-    mass = 125 * 1.660539e-27
+    mass = atom_mass * 1.660539e-27 # in Kg
+
     amplitude = np.sqrt(h_si / (2 * mass * 2 * np.pi * phonon_energy)) * np.sqrt(dist + (1 / 2))
+
     amplitude = amplitude * 1e10 # in angstrom
 
     return amplitude
@@ -52,7 +54,7 @@ def random_uniform(a, b):
 
     return np.random.uniform(a, b)
 
-def disp_vect(number_atoms, number_q, number_mu, eigenvalues_list, eigenvectors_list, temperature):
+def disp_vect(number_atoms, number_q, number_mu, eigenvalues_list, eigenvectors_list, mass_list, temperature):
     """
     Generates a displacement vector for a given ensemble of phonons and at a given temperature
 
@@ -62,6 +64,7 @@ def disp_vect(number_atoms, number_q, number_mu, eigenvalues_list, eigenvectors_
         number_mu -> number of different phonon modes (3*N, where N is the number of atoms in the unit cell)
         eigenvalues_list -> phonon eigenvalues with format [[mu_1, mu_2, ...]_q_1, [mu_1, mu_2, ...]_q_2, ...]
         eigenvectors_list -> phonon eigenvectors with format [[[atom_1, atom_2, ..]mu_1, [...]mu_2, ...]_q_1, [mu_1[...], mu_2[...], ...]_q_2, ...]
+        mass_list -> mass of all the atoms considered
         temperature -> temperature (in K)
     """
 
@@ -74,9 +77,8 @@ def disp_vect(number_atoms, number_q, number_mu, eigenvalues_list, eigenvectors_
             eigenvalue = eigenvalues_list[q_val][mu_val]
             eigenvectors =  eigenvectors_list[q_val][mu_val]
 
-            amplitude = phonon_amplitude(temperature, eigenvalue)
-
             for atom in range(number_atoms):
+                amplitude = phonon_amplitude(temperature, eigenvalue, mass_list[atom])
                 initial_phase = random_uniform(0, 2*np.pi)
 
                 vector[atom][0] = vector[atom][0] + (eigenvectors[atom][0] * amplitude * np.cos(initial_phase))
@@ -93,7 +95,7 @@ def disp_vect(number_atoms, number_q, number_mu, eigenvalues_list, eigenvectors_
 def get_phonopy(path_file):
     """
     It extracts the number of q-points, and the eigenvalues and eigenvectors for each q-point,
-    from mesh.yaml phonopy output file
+    from mesh.yaml phonopy output file. It also extracts the atomic masses of the atoms
 
     Inputs:
         path_file -> path to the mesh.yaml file
@@ -107,6 +109,7 @@ def get_phonopy(path_file):
     number_q = data['nqpoint']
     eigenvalues = []
     eigenvectors = []
+    mass_list = []
 
     for q_val in range(number_q):
         eigenvalue = []
@@ -130,17 +133,20 @@ def get_phonopy(path_file):
         
         eigenvectors.append(eigenvector_mu)
 
-    return number_q, eigenvalues, eigenvectors
+    for atom in range(number_phonons // 3):
+        mass_list.append(data['points'][atom]['mass'])
+
+    return number_q, eigenvalues, eigenvectors, mass_list
 
 
 ### Code
-nq, values, vectors = get_phonopy('phonon-data/anharmonic-T200-nac/mesh.yaml')
+nq, values, vectors, masses = get_phonopy('phonon-data/anharmonic-T200-nac/mesh.yaml')
 
-result = disp_vect(5, nq, 15, values, vectors, 10)
+result = disp_vect(5, nq, 15, values, vectors, masses, 10)
 print(result)
 
-result = disp_vect(5, nq, 15, values, vectors, 100)
+result = disp_vect(5, nq, 15, values, vectors, masses, 100)
 print(result)
 
-result = disp_vect(5, nq, 15, values, vectors, 1000)
+result = disp_vect(5, nq, 15, values, vectors, masses, 1000)
 print(result)
