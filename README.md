@@ -62,6 +62,7 @@ The scripts and available content:
    - Cut XDATCAR file.
    - Impose rotational sum rules to phonon force constants.
    - Study phonon mode modulus difference above and below a phonon gap.
+   - Generate distorted structures with Monte Carlo, from phonon eigenvectors at a given T.
 
 
 ## Disclaimer
