@@ -1,0 +1,1 @@
+Phonopy generates random displacements with temperature for a given T and a given supercell size. It uses all the phonon modes over q-points that are commesurate to the supercell size
