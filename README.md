@@ -18,6 +18,7 @@ The scripts and available content:
    - Compute the charge density.
    - Perform band alignment calculations.
    - VCA calculations.
+   - DFT calculations within the GW approximation.
 - **Quantum ESPRESSO input files**: Input files to perform DFT calculations with [Quantum ESPRESSO](https://www.quantum-espresso.org/) software. The input files available can be used to:
    - Single point energy calculations.
    - Ionic relaxations.
