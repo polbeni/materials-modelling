@@ -1,0 +1,12 @@
+Perform a DFT calculation in the GW approximation. In this case we are doing a band gap calculation using hybrid functionals, and for the GW method we are using a single shot calculation (G_0W_0).
+The pseudopotentials used in the calculations should be the POTCAR files for GW (_GW).
+
+(VASP tutorial: https://www.vasp.at/tutorials/latest/gw/part1/)
+A single-shot GW calculation (G_0W_0) is performed in three steps:
+
+	1. The first step is a DFT-ground-state calculation.
+
+	2. In the second step one restarts from the self-consistent solution (WAVECAR) of (1) and computes additional unoccupied KS eigenstates. This is done by a single exact diagonalization of the Hamilton matrix. These additional unoccupied KS states are needed to compute the dielectric screening properties. Furthermore, in this second step we compute the change of the cell periodic part of the KS orbitals with respect to the Bloch vector  
+k (this information is stored on the WAVEDER file).
+
+	3. The third and final step is the actual G_0W_0 calculation. This step needs the WAVECAR and WAVEDER from (2) as a starting point.

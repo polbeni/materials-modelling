@@ -1,0 +1,25 @@
+SYSTEM   =  INCAR for electronic structure determination with GW and hybrid functionals (step 2)
+
+LCHARG   =  .FALSE.     # write charge densities
+LWAVE    =  .TRUE.      # write wavefunctions
+LREAL    =  .FALSE.     # the projection operators are evaluated in real-space or reciprocal-space
+
+EDIFF    =  1E-7        # break condition for electronic loop (eV)
+ENCUT    =  550.0       # energy cutoff for the plane-wave basis (eV)
+
+ISMEAR   =  0           # partial occupancies for each orbital (0->Gaussian smearing)
+SIGMA    =  0.2         # width of the smearing (eV)
+
+ALGO     =  Exact       # electronic minimization algorithm
+NELM     =  1           # maximum number of electronic steps (we are already converged after one step)
+
+NBANDS   =  512         # number of bands considered (it needs to be a large value)
+
+LOPTICS  =  .TRUE.      # calculates the dielectric tensor (it needs to be .TRUE. for insulator systems, writes WAVEDER)
+
+#### HYBRID FUNCTIONALS ####
+LHFCALC  =  .TRUE.      # specifies if HF/DFT hybrid functional type calculation is performed
+HFSCREEN =  0.2         # range-separation parameter in range-separated hybrif functionals (angstrom)
+PRECFOCK =  F           # FFT grids used in hybrid functionals routines
+GGA      =  PS          # type of LDA or GGA exchange-correlation functional
+###########################

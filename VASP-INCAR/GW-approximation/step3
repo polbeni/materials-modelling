@@ -1,0 +1,18 @@
+SYSTEM   =  INCAR for electronic structure determination with GW and hybrid functionals (step 3)
+
+LCHARG   =  .FALSE.     # write charge densities
+LWAVE    =  .FALSE.     # write wavefunctions
+LREAL    =  .FALSE.     # the projection operators are evaluated in real-space or reciprocal-space
+
+EDIFF    =  1E-7        # break condition for electronic loop (eV)
+ENCUT    =  550.0       # energy cutoff for the plane-wave basis (eV)
+
+ISMEAR   =  0           # partial occupancies for each orbital (0->Gaussian smearing)
+SIGMA    =  0.2         # width of the smearing (eV)
+
+NBANDS   =  512         # number of bands considered (same value as in step 2)
+
+#### G_0W_0 ####
+ALGO     =  EVGW0       # use GW_0 for GW approximation
+NELMGW   =  1           # number of self-consistent GW steps (if == 1, single shot calculation (G_0W_0))
+################
