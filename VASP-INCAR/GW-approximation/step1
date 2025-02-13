@@ -10,7 +10,8 @@ ENCUT    =  550.0       # energy cutoff for the plane-wave basis (eV)
 ISMEAR   =  0           # partial occupancies for each orbital (0->Gaussian smearing)
 SIGMA    =  0.2         # width of the smearing (eV)
 
-ALGO     =  Conjugate   # electronic minimization algorithm
+ALGO     =  Damped      # electronic minimization algorithm
+TIME     =  0.5         # time step (because ALGO = Damped)
 
 #### HYBRID FUNCTIONALS ####
 LHFCALC  =  .TRUE.      # specifies if HF/DFT hybrid functional type calculation is performed
