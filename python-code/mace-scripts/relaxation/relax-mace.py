@@ -2,7 +2,6 @@
 # Universitat Politècnica de Catalunya
 
 # Script to run a relaxation using ASE calculator and MACE machine-learning interatomic potentials
-# The returned values are the system energy, the atoms forces and the system stress tensor
 
 import warnings
 
