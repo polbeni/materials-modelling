@@ -59,11 +59,12 @@ The scripts and available content:
    - Generate distorted structures with uniform or gaussian noise for each atom.
    - Get POSCAR from a phonopy.yaml file.
    - Plot a given band in the full Brillouin zone of a 2D material.
-   - Prepare calculations to compute e-p matrix elements with QuantumESPRESSO.
+   - Prepare calculations to compute e-p matrix elements with [Quantum ESPRESSO](https://www.quantum-espresso.org/).
    - Cut XDATCAR file.
    - Impose rotational sum rules to phonon force constants.
    - Study phonon mode modulus difference above and below a phonon gap.
    - Generate distorted structures with Monte Carlo, from phonon eigenvectors at a given T.
+   - Use [MACE](https://mace-docs.readthedocs.io/en/latest/index.html) for single shot calculations, relaxations and molecular dynamics simulations.
 
 
 ## Disclaimer
