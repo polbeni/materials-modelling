@@ -3,7 +3,6 @@
 
 # Script to run a relaxation using ASE calculator and MACE machine-learning interatomic potentials
 # Same that md script but here we start with initialized atomic velocities to the correct temperature
-# The returned values are the system energy, the atoms forces and the system stress tensor
 
 import warnings
 
