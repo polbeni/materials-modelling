@@ -22,13 +22,19 @@ torch.serialization.add_safe_globals([slice])
 
 warnings.simplefilter('ignore')
 
+# Choose the device you want to use cpu or cuda
+device = 'cpu' #'cuda'
+
+# Chose the model (default: 'large')
+model = 'large'
+
 # Read the system (with VASP structure format)
 crystal_structure = Structure.from_file('SPOSCAR')
 ase_adaptor = AseAtomsAdaptor()
 atoms = ase_adaptor.get_atoms(crystal_structure)
 
 # Load the MACE calculator
-atoms.calc = mace_mp(model='large', device='cpu')
+atoms.calc = mace_mp(model=model, device=device)
 
 # Set up the molecular dynamics parameters
 temperature = 300      # in K
