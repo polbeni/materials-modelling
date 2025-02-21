@@ -17,13 +17,7 @@
 
 import subprocess
 import yaml
-from collections import Counter
 import warnings
-
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.ticker import MultipleLocator
-from matplotlib.gridspec import GridSpec
 
 from pymatgen.core import Structure
 from pymatgen.io.ase import AseAtomsAdaptor
