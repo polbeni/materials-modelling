@@ -1,1 +1,3 @@
 Use this script if when relaxing the structure you only want to change the lattice constants (not atoms positions, neither lattice angles).
+
+After the relaxation the POSCAR file has a weird format, thus it is rewritten in its usual format (if not DynaPhoPy complains).

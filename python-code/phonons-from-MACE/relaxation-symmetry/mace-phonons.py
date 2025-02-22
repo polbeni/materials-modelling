@@ -66,12 +66,37 @@ atoms_filter = ExpCellFilter(atoms, mask=mask) # allow lattice parameters to cha
 dyn = BFGS(atoms_filter) # relax the structure
 dyn.run(fmax=0.001, steps=200)
 
-write_vasp('POSCAR', atoms=atoms, direct=True) # save the relaxed structure
+write_vasp('POSCAR-after-relax', atoms=atoms, direct=True) # save the relaxed structure
+
+old_POSCAR = open('POSCAR-after-relax', 'r') # fix the POSCAR structure format
+new_POSCAR = open('POSCAR', 'w')
+
+for x in range(7):
+    line = old_POSCAR.readline()
+    new_POSCAR.write(line)
+
+    if x == 6: # read the number of atoms
+        num_atoms = 0
+        for atom in range(len(line.split())):
+            num_atoms = num_atoms + int(line.split()[atom])
+
+old_POSCAR.readline()
+
+line = old_POSCAR.readline()
+new_POSCAR.write(line)
+
+for x in range(num_atoms):
+    line = old_POSCAR.readline()
+    new_POSCAR.write(f'   {float(line.split()[0])}   {float(line.split()[1])}   {float(line.split()[2])}\n')
+
+old_POSCAR.close()
+new_POSCAR.close()
 
 
 ### Use phonopy to generate the distorted structures
 command = f'phonopy -d --dim="{dimension_supercell}"'  
 result = subprocess.run(command, shell=True, capture_output=True, text=True)
+
 
 ### Save the number of atoms in the supercell and the number of distorted structures
 with open('phonopy_disp.yaml', 'r') as f:
