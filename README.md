@@ -66,6 +66,7 @@ The scripts and available content:
    - Generate distorted structures with Monte Carlo, from phonon eigenvectors at a given T.
    - Use [MACE](https://mace-docs.readthedocs.io/en/latest/index.html) for single shot calculations, relaxations and molecular dynamics simulations.
    - Compute phonon frequencies (harmonic and anharmonic) using phonopy (and dynaphopy for anharmonicity) from the forces computed using MACE.
+   - Generates a pT-diagram from phonon calculations.
 
 
 ## Disclaimer
