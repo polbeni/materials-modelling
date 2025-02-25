@@ -31,7 +31,8 @@ for phase in phases_list:
     for pressure in range(len(pressure_array)):
         sh_script.write(f'phonopy-qha --tmax 1800 --pressure {pressure_array[pressure]} e-v.dat thermal_properties-*.yaml \n')
         sh_script.write(f'cp gibbs-temperature.dat gibbs-{pressure + 1}.dat \n')
-
+        sh_script.write(f'cp volume-temperature.dat volume-temperature-{pressure + 1}.dat \n')
+        
     sh_script.write(f'rm Cp-temperature.dat Cp-temperature_polyfit.dat Cv-volume.dat bulk_modulus-temperature.dat dsdv-temperature.dat entropy-volume.dat gibbs-temperature.dat gruneisen-temperature.dat helmholtz-volume.dat helmholtz-volume_fitted.dat thermal_expansion.dat volume-temperature.dat \n')
 
     sh_script.write('cd ../.. \n')
