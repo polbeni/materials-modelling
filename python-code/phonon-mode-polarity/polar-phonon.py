@@ -16,7 +16,7 @@ def get_oxidation_states(path):
         path -> path to the POSCAR file
     """
 
-    structure = Structure.from_file("POSCAR")
+    structure = Structure.from_file(path)
     
     bva = BVAnalyzer()
     structure_with_oxidation = bva.get_oxi_state_decorated_structure(structure)
