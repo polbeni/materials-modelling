@@ -67,6 +67,7 @@ The scripts and available content:
    - Use [MACE](https://mace-docs.readthedocs.io/en/latest/index.html) for single shot calculations, relaxations and molecular dynamics simulations.
    - Compute phonon frequencies (harmonic and anharmonic) using phonopy (and dynaphopy for anharmonicity) from the forces computed using MACE.
    - Generates a pT-diagram from phonon calculations.
+   - Determine if a phonon mode is polar or not.
 
 
 ## Disclaimer
