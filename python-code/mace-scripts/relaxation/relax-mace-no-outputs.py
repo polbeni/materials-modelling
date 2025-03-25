@@ -2,7 +2,7 @@
 # Universitat Politècnica de Catalunya
 
 # Script to run a relaxation using ASE calculator and MACE machine-learning interatomic potentials
-# It does not use output files (run.traj and run.log)
+# It does not use output file (run.traj)
 
 import warnings
 
@@ -43,7 +43,7 @@ smax = 200 # max number of steps for the relaxation
 
 # Perform the relaxation (here using BFGS other method can be found in 
 # ASE documentation: https://wiki.fysik.dtu.dk/ase/ase/optimize.html)
-dyn = BFGS(atoms_filter)
+dyn = BFGS(atoms_filter, logfile='run.log')
 dyn.run(fmax=fmax, steps=smax)
 
 # Get the final relaxed structure
