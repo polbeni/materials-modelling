@@ -83,6 +83,29 @@ phonon.set_total_DOS()
 
 np.savetxt('phonon_dos.dat', np.array(phonon.get_total_DOS()).T, header='Frequency(THz) DOS')
 
+# count the proportion of imaginary freq
+def proportion_imaginary(dos):
+    """
+    Returns the proportion of imaginary phonon modes in the phonon DOS
+
+    Inputs:
+        dos: phonon DOS (density of states)
+    """
+    prop_imag = 0
+    prop_real = 0
+
+    for state in range(len(dos[0])):
+        if dos[0][state] < 0:
+            prop_imag = prop_imag + dos[1][state]
+        else:
+            prop_real = prop_real + dos[1][state]
+    
+    return prop_imag / (prop_imag + prop_real)
+
+prop_imaginary_phonon = proportion_imaginary(np.array(phonon.get_total_DOS()))
+
+print(f'The proportion of imaginary phonon modes with respect real modes is: {prop_imaginary_phonon}')
+
 # compute thermal properties
 phonon.set_thermal_properties(t_max=1000, t_min=0, t_step=10)
 temperatures, free_energy = phonon.get_thermal_properties()[:2]
