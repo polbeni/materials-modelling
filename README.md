@@ -68,6 +68,7 @@ The scripts and available content:
    - Compute phonon frequencies (harmonic and anharmonic) using phonopy (and dynaphopy for anharmonicity) from the forces computed using MACE.
    - Generates a pT-diagram from phonon calculations.
    - Determine if a phonon mode is polar or not.
+   - Use phonopy with python scripts.
 
 
 ## Disclaimer
