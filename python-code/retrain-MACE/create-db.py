@@ -82,19 +82,63 @@ def create_xyz(vaspruns, prop_train, n_blocks):
     # Save all the data in the xyz file
     num_cases = len(num_atoms)
 
-    train_file = open('file.xyz', 'w')
+    num_cases_train = int(num_cases * prop_train)
 
-    for structure in range(num_cases):
-        # Write the atoms number
-        train_file.write(f'{num_atoms[structure]}\n')
+    disorded_struc = create_shuffled_array(num_cases)
 
-        # Write the metadata
-        train_file.write(f'Lattice=\"{lattice_array[structure]}\" Properties=species:S:1:pos:R:3:forces:R:3 energy={energy_array[structure]} REF_stress=\"{stress_array[structure]}\"\n')
+    train_file = open('train.xyz', 'w')
+    test_file = open('test.xyz', 'w')
 
-        # Write the atom data
-        for num_atom in range(num_atoms[structure]):
-            train_file.write(f'{atoms_array[structure][num_atom]} {positions_array[structure][num_atom]} {forces_array[structure][num_atom]}\n')
+    it_structure = 0
+    for structure in disorded_struc:
+        if it_structure <= (num_cases_train - 1):
+            # Write the atoms number
+            train_file.write(f'{num_atoms[structure]}\n')
+
+            # Write the metadata
+            train_file.write(f'Lattice=\"{lattice_array[structure]}\" Properties=species:S:1:pos:R:3:forces:R:3 energy={energy_array[structure]} REF_stress=\"{stress_array[structure]}\"\n')
+
+            # Write the atom data
+            for num_atom in range(num_atoms[structure]):
+                train_file.write(f'{atoms_array[structure][num_atom]} {positions_array[structure][num_atom]} {forces_array[structure][num_atom]}\n')
+        else:
+            # Write the atoms number
+            test_file.write(f'{num_atoms[structure]}\n')
+
+            # Write the metadata
+            test_file.write(f'Lattice=\"{lattice_array[structure]}\" Properties=species:S:1:pos:R:3:forces:R:3 energy={energy_array[structure]} REF_stress=\"{stress_array[structure]}\"\n')
+
+            # Write the atom data
+            for num_atom in range(num_atoms[structure]):
+                test_file.write(f'{atoms_array[structure][num_atom]} {positions_array[structure][num_atom]} {forces_array[structure][num_atom]}\n')
+
+        it_structure = it_structure + 1
 
     train_file.close()
+    test_file.close()
 
-create_xyz(['data/spc-1/vasprun.xml'], 0.8, 5)
+
+def create_shuffled_array(n):
+    """
+    Returns a list with the intergers from 0 to n-1 disordered
+
+    Inputs:
+        n: size of the list
+    """
+
+    numbers = list(range(n))
+ 
+    random.shuffle(numbers)
+
+    return numbers
+
+### INPUT PARAMETERS ###
+n_blocks = 5 # Save every n_blocks step from AIMD
+train_ratio = 0.8 # Proportion of data for training
+path_to_vaspruns = 'data/**/vasprun.xml'
+
+# Take the vasprun.xml data from the specified path
+vasp_files = glob.glob(path_to_vaspruns, recursive=True)  # Modify path
+
+# Create the xyz files
+create_xyz(vasp_files, train_ratio, n_blocks)
