@@ -69,6 +69,7 @@ The scripts and available content:
    - Generates a pT-diagram from phonon calculations.
    - Determine if a phonon mode is polar or not.
    - Use phonopy with python scripts.
+   - Retrain MACE MLIP model.
 
 
 ## Disclaimer
