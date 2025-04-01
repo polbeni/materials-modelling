@@ -70,6 +70,7 @@ The scripts and available content:
    - Determine if a phonon mode is polar or not.
    - Use phonopy with python scripts.
    - Retrain MACE MLIP model.
+   - Generate molecular crystals from molecule xyz file.
 
 
 ## Disclaimer
