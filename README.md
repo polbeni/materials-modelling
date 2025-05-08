@@ -71,6 +71,7 @@ The scripts and available content:
    - Use phonopy with python scripts.
    - Retrain MACE MLIP model.
    - Generate molecular crystals from molecule xyz file.
+   - Study the behaviour of molecules in molecular crystals.
 
 
 ## Disclaimer
