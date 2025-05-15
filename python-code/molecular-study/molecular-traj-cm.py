@@ -31,6 +31,16 @@ def get_num_atoms(path_XDATCAR):
 
     return num_atoms, num_carbons
 
+def wrap_coordinates(x, y, z):
+    """
+    Ensure periodic boundary conditions
+
+    Inputs:
+        x, y, z: coordinates
+    """
+
+    return [x % 1, y % 1, z % 1]
+
 def generate_pairs(total_num_carbons):
     """
     Generates the different pair of atom indices representing each molecule
@@ -92,7 +102,7 @@ def center_mass_position(positions, masses):
 
     return vec_cm
 
-def get_vectors_AIMD(path_XDATCAR, num_atoms, num_iterations, atom_1, atom_2, molecule_positions, masses_list):
+def get_vectors_AIMD(path_XDATCAR, num_atoms, num_iterations, atom_1, atom_2, molecule_positions, masses_list, lattice_parameters):
     """
     Returns a list with the vector for a pair of atoms and the position of the center of mass for each time step of the AIMD
 
@@ -102,6 +112,7 @@ def get_vectors_AIMD(path_XDATCAR, num_atoms, num_iterations, atom_1, atom_2, mo
         num_iterations: total number of iterations to include
         atom_1, atom_2: indices of the two considered atoms
         masses_list: array with all the masses in the molecule
+        lattice_parameters: lattice parameters of the unit cell
     """
 
     XDATCAR = open(path_XDATCAR, 'r')
@@ -112,24 +123,36 @@ def get_vectors_AIMD(path_XDATCAR, num_atoms, num_iterations, atom_1, atom_2, mo
     list_vectors = []
     list_positions = []
 
-    for _ in range(num_iterations):
+    reference_position = [0, 0, 0]
+
+    for it_md in range(num_iterations):
         XDATCAR.readline()
 
         positions_atoms = []
         for it_atom in range(num_atoms):
             line = XDATCAR.readline()
+            
             if (it_atom + 1) == atom_1:
-                vec1 = [float(line.split()[0]), float(line.split()[1]), float(line.split()[2])]
+                vec1 = [float(line.split()[0])*lattice_parameters[0], float(line.split()[1])*lattice_parameters[1], float(line.split()[2])*lattice_parameters[2]]
             elif (it_atom + 1) == atom_2:
-                vec2 = [float(line.split()[0]), float(line.split()[1]), float(line.split()[2])]
+                vec2 = [float(line.split()[0])*lattice_parameters[0], float(line.split()[1])*lattice_parameters[1], float(line.split()[2])*lattice_parameters[2]]
 
             if (it_atom + 1) in molecule_positions:
-                positions_atoms.append([float(line.split()[0]), float(line.split()[1]), float(line.split()[2])])
+                positions_atoms.append([float(line.split()[0])*lattice_parameters[0], float(line.split()[1])*lattice_parameters[1], float(line.split()[2])*lattice_parameters[2]])
         
+        if it_md == 0:
+            reference_position = define_origin_molecule(positions_atoms)
+        else:
+            reference_position = cm_point
+
+        corrected_positions = correct_positions(positions_atoms, reference_position, lattice_parameters)
+        vec1 = corrected_positions[0]
+        vec2 = corrected_positions[1]
         final_vector = [vec2[0] - vec1[0], vec2[1] - vec1[1], vec2[2] - vec1[2]]
         list_vectors.append(final_vector)
 
-        cm_point = center_mass_position(positions_atoms, masses_list)
+        corrected_positions = correct_positions(positions_atoms, reference_position, lattice_parameters)
+        cm_point = center_mass_position(corrected_positions, masses_list)
         list_positions.append(cm_point)
 
     return list_vectors, list_positions
@@ -147,7 +170,7 @@ def position_change(list_positions):
     inital_position_z = list_positions[0][2]
 
     disp_x = []
-    disp_y= []
+    disp_y = []
     disp_z = []
 
     for it_num in range(len(list_positions)):
@@ -276,7 +299,59 @@ def make_plots(time_step, num_steps, molecule_disp_x, molecule_disp_y, molecule_
     plt.tight_layout()
     plt.savefig(f'resultats/rotations-{type_struc}-{temp}.pdf')
 
-def run_everything(path, structure, temperature):
+def define_origin_molecule(atoms_positions):
+    """
+    It defines an original positions for all the molecules
+
+    Inputs:
+        atoms_positions: list with the positions of all the atoms
+    """
+
+    center = atoms_positions[0]
+
+    return center
+
+def correct_positions(atoms_positions, center_molecule, lattice_parameters, threshold=8):
+    """
+    Corrects the positions of the atoms that are in the other side of the pbc of the cell
+
+    Inputs:
+        atoms_positions: list with the positions of all the atoms
+        center_molecule: the center of the molecule in the previous step, it is used as a reference
+        lattice_parameters: lattice parameters of the unit cell
+        threshold: distance threshold to see if the atom is not in the correct side
+    """
+    new_positions = []
+
+    for atom in atoms_positions:
+        new_pos = []
+
+        if (atom[0] - center_molecule[0]) > threshold:
+            new_pos.append(atom[0] - lattice_parameters[0])
+        elif abs(-atom[0] + center_molecule[0]) > threshold:
+            new_pos.append(atom[0] + lattice_parameters[0])
+        else:
+            new_pos.append(atom[0])
+
+        if (atom[1] - center_molecule[1]) > threshold:
+            new_pos.append(atom[1] - lattice_parameters[1])
+        elif abs(-atom[1] + center_molecule[1]) > threshold:
+            new_pos.append(atom[1] + lattice_parameters[1])
+        else:
+            new_pos.append(atom[1])
+
+        if (atom[2] - center_molecule[2]) > threshold:
+            new_pos.append(atom[2] - lattice_parameters[2])
+        elif abs(-atom[2] + center_molecule[2]) > threshold:
+            new_pos.append(atom[2] + lattice_parameters[2])
+        else:
+            new_pos.append(atom[2])
+
+        new_positions.append(new_pos)
+
+    return new_positions
+
+def run_everything(path, structure, temperature, lattice_parameters):
     """
     It runs all the steps
 
@@ -284,6 +359,7 @@ def run_everything(path, structure, temperature):
         path: path to the XDATCAR file
         structure: type of the structure: vacancy, pristine...
         temperature: temperature of the simulation
+        lattice_parameters: lattice parameters of the unit cell
     """
 
     # Determine total number of atoms and generate the carbon pairs
@@ -300,7 +376,7 @@ def run_everything(path, structure, temperature):
     it_molecule = 0
     for pair in pairs_arr:
         print(f'Saving pair {pair}')
-        vectors, positions = get_vectors_AIMD(path, num_atoms, num_steps, pair[0], pair[1], molecules_arr[it_molecule], masses_list)
+        vectors, positions = get_vectors_AIMD(path, num_atoms, num_steps, pair[0], pair[1], molecules_arr[it_molecule], masses_list, lattice_parameters)
 
         pair_vectors.append(vectors)
         pair_positions.append(positions)
@@ -329,66 +405,67 @@ def run_everything(path, structure, temperature):
 
 
 # Global parameters
-num_steps = 13500
-time_step = 0.0015
+num_steps = 20000
+time_step = 0.005
+lattice_parameters = [18.182, 16.553, 16.931]
 
 # Run simulation
-path = 'total-XDATCAR-files/pristine/T-200/XDATCAR-merged'
+path = 'total-XDATCAR-files/pristine/T-200/XDATCAR'
 structure = 'Pristine'
 temperature = '200'
 
-run_everything(path, structure, temperature)
+run_everything(path, structure, temperature, lattice_parameters)
 
-path = 'total-XDATCAR-files/pristine/T-400/XDATCAR-merged'
+path = 'total-XDATCAR-files/pristine/T-400/XDATCAR'
 structure = 'Pristine'
 temperature = '400'
 
-run_everything(path, structure, temperature)
+run_everything(path, structure, temperature, lattice_parameters)
 
-path = 'total-XDATCAR-files/vacancy-1/T-200/XDATCAR-merged'
+path = 'total-XDATCAR-files/vacancy-1/T-200/XDATCAR'
 structure = 'Vacancy-1'
 temperature = '200'
 
-run_everything(path, structure, temperature)
+run_everything(path, structure, temperature, lattice_parameters)
 
-path = 'total-XDATCAR-files/vacancy-1/T-400/XDATCAR-merged'
+path = 'total-XDATCAR-files/vacancy-1/T-400/XDATCAR'
 structure = 'Vacancy-1'
 temperature = '400'
 
-run_everything(path, structure, temperature)
+run_everything(path, structure, temperature, lattice_parameters)
 
-path = 'total-XDATCAR-files/vacancy-2/T-200/XDATCAR-merged'
+path = 'total-XDATCAR-files/vacancy-2/T-200/XDATCAR'
 structure = 'Vacancy-2'
 temperature = '200'
 
-run_everything(path, structure, temperature)
+run_everything(path, structure, temperature, lattice_parameters)
 
-path = 'total-XDATCAR-files/vacancy-2/T-400/XDATCAR-merged'
+path = 'total-XDATCAR-files/vacancy-2/T-400/XDATCAR'
 structure = 'Vacancy-2'
 temperature = '400'
 
-run_everything(path, structure, temperature)
+run_everything(path, structure, temperature, lattice_parameters)
 
-path = 'total-XDATCAR-files/vacancy-3/T-200/XDATCAR-merged'
+path = 'total-XDATCAR-files/vacancy-3/T-200/XDATCAR'
 structure = 'Vacancy-3'
 temperature = '200'
 
-run_everything(path, structure, temperature)
+run_everything(path, structure, temperature, lattice_parameters)
 
-path = 'total-XDATCAR-files/vacancy-3/T-400/XDATCAR-merged'
+path = 'total-XDATCAR-files/vacancy-3/T-400/XDATCAR'
 structure = 'Vacancy-3'
 temperature = '400'
 
-run_everything(path, structure, temperature)
+run_everything(path, structure, temperature, lattice_parameters)
 
-path = 'total-XDATCAR-files/vacancy-4/T-200/XDATCAR-merged'
+path = 'total-XDATCAR-files/vacancy-4/T-200/XDATCAR'
 structure = 'Vacancy-4'
 temperature = '200'
 
-run_everything(path, structure, temperature)
+run_everything(path, structure, temperature, lattice_parameters)
 
-path = 'total-XDATCAR-files/vacancy-4/T-400/XDATCAR-merged'
+path = 'total-XDATCAR-files/vacancy-4/T-400/XDATCAR'
 structure = 'Vacancy-4'
 temperature = '400'
 
-run_everything(path, structure, temperature)
+run_everything(path, structure, temperature, lattice_parameters)
