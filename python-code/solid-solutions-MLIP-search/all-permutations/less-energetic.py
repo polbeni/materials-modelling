@@ -111,8 +111,8 @@ solid_solutions = [['Br', 'I', 'I', 'I', 'I', 'I', 'I', 'I'], ['Br', 'Br', 'I', 
                    ['Br', 'Br', 'Br', 'I', 'I', 'I', 'I', 'I'], ['Br', 'Br', 'Br', 'Br', 'I', 'I', 'I', 'I'],
                    ['Br', 'Br', 'Br', 'Br', 'Br', 'I', 'I', 'I'], ['Br', 'Br', 'Br', 'Br', 'Br', 'Br', 'I', 'I'],
                    ['Br', 'Br', 'Br', 'Br', 'Br', 'Br', 'Br', 'I']]
-ss_names_list = ['Ag3SBr0_1I0_9', 'Ag3SBr0_2I0_8', 'Ag3SBr0_3I0_7', 'Ag3SBr0_4I0_6', 'Ag3SBr0_5I0_5', 
-                 'Ag3SBr0_6I0_4', 'Ag3SBr0_7I0_3', 'Ag3SBr0_8I0_2', 'Ag3SBr0_9I0_']
+ss_names_list = ['Ag3SBr0_125I0_875', 'Ag3SBr0_25I0_75', 'Ag3SBr0_375I0_625', 'Ag3SBr0_5I0_5', 'Ag3SBr0_625I0_375', 
+                 'Ag3SBr0_75I0_25', 'Ag3SBr0_875I0_125']
 
 # Open the POSCAR
 structure = Poscar.from_file('POSCAR').structure
@@ -140,10 +140,12 @@ for ss in solid_solutions:
 
         solid_solution_atoms = list_without + permutation
 
+        new_species, new_coords = sort_atoms(solid_solution_atoms, solid_solution.frac_coords, 'Br', 'I')
+
         solid_solution_structure = Structure(
             lattice=solid_solution.lattice,
-            species=solid_solution_atoms,
-            coords=solid_solution.frac_coords,
+            species=new_species,
+            coords=new_coords,
             coords_are_cartesian=False
         )
 
