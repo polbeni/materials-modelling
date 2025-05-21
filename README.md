@@ -72,6 +72,7 @@ The scripts and available content:
    - Retrain MACE MLIP model.
    - Generate molecular crystals from molecule xyz file.
    - Study the behaviour of molecules in molecular crystals.
+   - Use MLIPs to explore solid solutions supercells.
 
 
 ## Disclaimer
