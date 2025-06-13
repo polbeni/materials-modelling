@@ -73,6 +73,7 @@ The scripts and available content:
    - Generate molecular crystals from molecule xyz file.
    - Study the behaviour of molecules in molecular crystals.
    - Use MLIPs to explore solid solutions supercells.
+   - Determine H(p) relation from a E(V) set of points.
 
 
 ## Disclaimer
