@@ -12,17 +12,19 @@ XDATCAR_path = 'XDATCAR'                                                # Path t
 
 outputs_dir = 'outputs_file/'                                           # Path to dir where outputs are saved
 
-total_configurations = 1200                                              # Total number of snapshots in the MD simulation
+total_configurations = 1200                                             # Total number of snapshots in the MD simulation
 number_of_snapshots = 20                                                # Number of snapshots we want to consider
+starting_point = 600                                                    # Initial snaphsot to consider
 ###########################################################################
 
 
-def generate_POSCAR_from_snapshots(XDATCAR_path, snapshots_num, total_num, path_to_POSCARS):
+def generate_POSCAR_from_snapshots(XDATCAR_path, starting_snap, snapshots_num, total_num, path_to_POSCARS):
     """
     Reads a XDATCAR file and save the snapshots as a POSCAR files
 
     Inputs:
         XDATCAR_path: path to the XDATCAR file
+        starting_snap: first snapshot to consider
         snapshots_num: desired number of snapshots to save as POSCAR
         total_num: total number of snapshots in the XDATCAR file
         path_to_POSCARS: path of dir to save the POSCARS
@@ -47,11 +49,16 @@ def generate_POSCAR_from_snapshots(XDATCAR_path, snapshots_num, total_num, path_
     for _ in range(7):
         XDATCAR.readline()
 
+    for snapshot in range(starting_snap):
+        XDATCAR.readline()
+        for _ in range(num_atoms):
+            XDATCAR.readline()
+
     num_snapshot = 1
-    for snapshot in range(total_num):
+    for snapshot in range(total_num - starting_snap):
         XDATCAR.readline()
 
-        if (snapshot % (int(total_num / snapshots_num))) == 0:
+        if (snapshot % (int((total_num - starting_snap) / snapshots_num))) == 0:
             POSCAR = open(path_to_POSCARS + 'POSCAR-' + str(num_snapshot).zfill(3), 'w')
             for line in same_lines:
                 POSCAR.write(line)
@@ -73,4 +80,4 @@ if os.path.exists(outputs_dir):
     shutil.rmtree(outputs_dir)
 os.mkdir(outputs_dir)
 
-generate_POSCAR_from_snapshots(XDATCAR_path, number_of_snapshots, total_configurations, outputs_dir)
+generate_POSCAR_from_snapshots(XDATCAR_path, starting_point, number_of_snapshots, total_configurations, outputs_dir)
