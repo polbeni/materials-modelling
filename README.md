@@ -74,6 +74,7 @@ The scripts and available content:
    - Study the behaviour of molecules in molecular crystals.
    - Use MLIPs to explore solid solutions supercells.
    - Determine H(p) relation from a E(V) set of points.
+   - Estimate the electric field necessary to induce polar phonon distortions.
 
 
 ## Disclaimer
