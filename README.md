@@ -75,6 +75,8 @@ The scripts and available content:
    - Use MLIPs to explore solid solutions supercells.
    - Determine H(p) relation from a E(V) set of points.
    - Estimate the electric field necessary to induce polar phonon distortions.
+   - Visualize the Gibbs surfaces of different structures as function of (p,T).
+   - Visualize the movement of ions in a material from a AIMD calculation.
 
 
 ## Disclaimer
