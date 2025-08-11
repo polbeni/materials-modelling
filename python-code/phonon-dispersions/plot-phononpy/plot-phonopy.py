@@ -51,7 +51,7 @@ def phonons_from_phonopy(file_path):
 
     return num_atoms, nqpoints, npaths, segments_nqpoints, points_labels, phonons
 
-def plot_phonon(paths, colors, labels, want_legend, title, want_title, y_lims, ticks_num, alpha_disp, width_disp, output_name):
+def plot_phonon(paths, colors, labels, want_legend, title, want_title, y_lims, ticks_num, alpha_disp, width_disp, output_name, threshold_disp):
     """
     Plots the phonon dispersions from band.yaml. It can handle different phonon data,
     but the same k-path should be provided
@@ -68,6 +68,7 @@ def plot_phonon(paths, colors, labels, want_legend, title, want_title, y_lims, t
         width_disp: desired line width for the dispersions (float)
         ticks_num: list with the number for every big and small ticks (array)
         output_name: name for the output file
+        threshold_disp: threshold for non continuous bands !!!(not really sure why, but take a small threshold, such as 1e-13)
     """
 
     plt.figure()
@@ -130,11 +131,54 @@ def plot_phonon(paths, colors, labels, want_legend, title, want_title, y_lims, t
 
             axs.set_xticks(ticks=x_ticks, labels=x_labels)
 
+        k_path = phonons[:, 0]
+        disp_continuity = []
+        k_path_continuity = []
         for x in range(num_atoms*3):
-            if x == 0:
-                axs.plot(phonons[:,0], phonons[:,x+1], linestyle='solid', color=colors[file_phon], alpha=alpha_disp, linewidth=width_disp, label=labels[file_phon])
-            else:
-                axs.plot(phonons[:,0], phonons[:,x+1], linestyle='solid', color=colors[file_phon], alpha=alpha_disp, linewidth=width_disp)
+            current_disp_curve = []
+            current_disp_kpath = []
+
+            actual_disp_line = phonons[:, x+1]
+
+            total_points = 0
+
+            fragment = []
+            fragment_k = []
+            for num_points in range(segments_nqpoints[0]):
+                fragment.append(actual_disp_line[total_points])
+                fragment_k.append(k_path[total_points])
+
+                total_points = total_points + 1
+
+            for segment_intersection in range(npaths - 1):
+                if abs(actual_disp_line[total_points] - actual_disp_line[total_points + 1]) > threshold_disp:
+                    current_disp_curve.append(fragment)
+                    current_disp_kpath.append(fragment_k)
+
+                    fragment = []
+                    fragment_k = []
+
+                for num_points in range(segments_nqpoints[segment_intersection + 1]):
+                    fragment.append(actual_disp_line[total_points])
+                    fragment_k.append(k_path[total_points])
+
+                    total_points = total_points + 1
+            
+            current_disp_curve.append(fragment)
+            current_disp_kpath.append(fragment_k)
+            
+            disp_continuity.append(current_disp_curve)
+            k_path_continuity.append(current_disp_kpath)
+
+        initial_disp_curve_ploted = True
+        for x in range(num_atoms*3):
+            for fragment in range(len(disp_continuity[x])):
+                if (x == 0) and (initial_disp_curve_ploted == True):
+                    axs.plot(k_path_continuity[x][fragment], disp_continuity[x][fragment], linestyle='solid', color=colors[file_phon], alpha=alpha_disp, linewidth=width_disp, label=labels[file_phon])
+
+                    initial_disp_curve_ploted = False
+                else:
+                    axs.plot(k_path_continuity[x][fragment], disp_continuity[x][fragment], linestyle='solid', color=colors[file_phon], alpha=alpha_disp, linewidth=width_disp)
     
     major_locator = MultipleLocator(ticks_num[0]) 
     minor_locator = MultipleLocator(ticks_num[1])  
@@ -151,5 +195,5 @@ def plot_phonon(paths, colors, labels, want_legend, title, want_title, y_lims, t
 
 
 # Test the code
-plot_phonon(['monoGS/harmonic/band.yaml', 'monoGS/anharmonic/band.yaml'], ['black', 'red'], ['harmonic', 'anharmonic'], False,
-            '$P2_1/c$', True, [-5, 25], [5, 1], 0.7, 1, 'monoGS.pdf')
+plot_phonon(['cubic/harmonic/band.yaml', 'cubic/anharmonic/band.yaml'], ['black', 'red'], ['harmonic', 'anharmonic'], False,
+            '$Fm\overline{3}m$', True, [-6, 25], [5, 1], 0.6, 1, 'phonon-cubic.pdf', 1e-13)
