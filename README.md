@@ -78,6 +78,7 @@ The scripts and available content:
    - Visualize the Gibbs surfaces of different structures as function of (p,T).
    - Visualize the movement of ions in a material from a AIMD calculation.
    - Scripts to run CrySPY software.
+   - Prepare calculations and determine convex hull for a binary system.
 
 
 ## Disclaimer
