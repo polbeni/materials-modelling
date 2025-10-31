@@ -1,0 +1,20 @@
+mace_run_train \
+    --name="test_training_model" \
+    --train_file="dataset_training.extxyz" \
+    --valid_fraction=0.05 \
+    --E0s="average" \
+    --model="MACE" \
+    --hidden_irreps='128x0e + 128x1o' \
+    --r_max=6.0 \
+    --batch_size=8 \
+    --max_num_epochs=2000 \
+    --swa \
+    --start_swa=1600 \
+    --restart_latest \
+    --device=cuda \
+    --energy_key="REF_energy" \
+    --ema \
+    --ema_decay=0.99 \
+    --amsgrad \
+    --patience=15 \
+    --forces_key="REF_forces" \
