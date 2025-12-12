@@ -80,6 +80,7 @@ The scripts and available content:
    - Scripts to run CrySPY software.
    - Prepare calculations and determine convex hull for a binary system.
    - Generate thermal displacements from FC using phonopy.
+   - Plot the MSD and get diffusion coefficient from a MD simulation by using kinisi module.
 
 
 ## Disclaimer
