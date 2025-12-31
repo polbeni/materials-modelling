@@ -91,3 +91,44 @@ These codes are not intended for general use or as tools to assist other researc
 
 This code and repository are being developed by:
 - Pol Benítez Colominas (pol.benitez@upc.edu)
+
+## How to cite
+
+This repository is a collection of utility scripts developed and used in several research projects.  
+If you find these scripts useful and would like to cite related work, you may reference, for example:
+```
+@article{benitez2025band,
+  title={Band-gap tunability in anharmonic perovskite-like semiconductors driven by polar electron--phonon coupling},
+  author={Ben{\'\i}tez, Pol and Jiang, Ruoshi and Chen, Siyu and L{\'o}pez, Cibr{\'a}n and Tamarit, Josep-Llu{\'\i}s and Saucedo, Edgardo and Monserrat, Bartomeu and Cazorla, Claudio},
+  journal={Journal of the American Chemical Society},
+  volume={147},
+  number={41},
+  pages={37506--37520},
+  year={2025},
+  publisher={ACS Publications}
+}
+```
+```
+@article{benitez2025giant,
+  title={Giant thermally induced band-gap renormalization in anharmonic silver chalcohalide antiperovskites},
+  author={Ben{\'\i}tez, Pol and Chen, Siyu and Jiang, Ruoshi and L{\'o}pez, Cibr{\'a}n and Tamarit, Josep-Llu{\'\i}s and {\'I}{\~n}iguez-Gonz{\'a}lez, Jorge and Saucedo, Edgardo and Monserrat, Bartomeu and Cazorla, Claudio},
+  journal={Journal of Materials Chemistry C},
+  volume={13},
+  number={20},
+  pages={10399--10412},
+  year={2025},
+  publisher={Royal Society of Chemistry}
+}
+```
+```
+@article{benitez2025crystal,
+  title={Crystal structure prediction and phase stability in highly anharmonic silver-based chalcohalide antiperovskites},
+  author={Ben{\'\i}tez, Pol and L{\'o}pez, Cibr{\'a}n and Liu, Cong and Ca{\~n}o, Ivan and Tamarit, Josep-Llu{\'\i}s and Saucedo, Edgardo and Cazorla, Claudio},
+  journal={PRX Energy},
+  volume={4},
+  number={2},
+  pages={023002},
+  year={2025},
+  publisher={APS}
+}
+```
