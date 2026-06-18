@@ -82,6 +82,7 @@ The scripts and available content:
    - Generate thermal displacements from FC using phonopy.
    - Plot the MSD and get diffusion coefficient from a MD simulation by using kinisi module.
    - Perform NPT MD simulations with ASE and get the change of the simulation box.
+   - Generate GROMACS output file from an ASE MD .traj file.
 
 
 ## Disclaimer
